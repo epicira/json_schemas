@@ -12,6 +12,7 @@ const char* ConfFileSchema = R"(
       "enable": {"type": "boolean", "enum" : [true,false] },
       "short_delay": {"type": "integer", "minimum": 2},
       "long_delay": {"type": "integer", "minimum": 2},
+      "max_total_queue_size": {"type": "integer", "minimum": 100},
       "cps_percent": {"type": "number", "maximum": 1.0},
       "dial_timeout": {"type": "integer", "minimum": 5, "maximum": 60},
       "working_hours": {"type": "string", "minLength": 5}
