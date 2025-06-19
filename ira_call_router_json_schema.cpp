@@ -56,9 +56,10 @@ const char* HangupEventSchema = R"(
 		"event_name": {"type": "string", "enum": ["report_hangup_event"] },
 		"event_data": {"type": "object",
 		"properties" : {
-			"call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
+			"call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+			"dialer_pod": {"type": "string", "minLength": 2}
 		},
-		"required": ["call_uuid"] 
+		"required": ["call_uuid","dialer_pod"] 
 		}
 	},
 	"required": [ "event_name", "event_data"]

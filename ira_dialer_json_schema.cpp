@@ -399,4 +399,20 @@ const char* InstanceActivationSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
+const char* HangupEventConfirmationSchema = R"(
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"event_name": {"type": "string", "enum": ["hangup_event_confirmation"] },
+		"event_data": {"type": "object",
+		"properties" : {
+			"call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
+		},
+		"required": ["call_uuid"] 
+		}
+	},
+	"required": [ "event_name", "event_data"]
+})";
+
 }
