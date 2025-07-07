@@ -4,7 +4,7 @@ const char* ConfFileSchema = R"(
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-    "app_name": {"type": "string"},
+    "fs_event_log": {"type": "string", "enum": ["none","call_events","all_events"] },
 	"dial_timeout": {"type": "integer"},
 	"eventlog_days": {"type": "integer"},
 	"max_dial_ports": {"type": "integer"},

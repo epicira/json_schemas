@@ -8,7 +8,6 @@ const char* ConfFileSchema = R"(
     "type": "object",
     "properties": {
       "dialer_app": {"type": "string", "minLength": 2},
-      "app_name": {"type": "string"},
       "enable": {"type": "boolean", "enum" : [true,false] },
       "short_delay": {"type": "integer", "minimum": 2},
       "long_delay": {"type": "integer", "minimum": 2},

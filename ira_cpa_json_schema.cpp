@@ -72,7 +72,6 @@ const char* ConfFileSchema = R"(
     "type": "object",
     "properties": {
       "use_self_signed_certificate": {"type": "boolean", "enum" : [true,false] },
-      "app_name": {"type": "string"},
       "wss_certificate_file": {"type": "string"},
       "wss_private_key_file": {"type": "string"},
       "wss_dh_params_file": {"type": "string"},

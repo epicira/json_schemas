@@ -5,7 +5,6 @@ const char* ConfFileSchema = R"(
     "type": "object",
     "properties": {
       "tenant_id": {"type": "string", "minLength": 2, "maxLength": 50},
-      "app_name": {"type": "string"},
       "event_subject": {"type": "string", "minLength": 5},
       "sip_fields": {
         "type": "array",

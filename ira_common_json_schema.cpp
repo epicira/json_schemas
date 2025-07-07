@@ -15,7 +15,6 @@ const char* BasicConfFileSchema = R"(
 	"ira_http_proxy": {"type": "string", "minLength": 5},
 	"ira_core_count": {"type": "integer"},
 	"ira_core_thread_count": {"type": "integer"},
-	"app_name": {"type": "string"},
 	"nats_conf_file": {"type": "string", "minLength": 2},
 	"nats_conf": {"type": "object",
 		"properties": {
