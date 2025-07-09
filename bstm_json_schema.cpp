@@ -423,4 +423,25 @@ const char* HangupEventConfirmationSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
+const char* SendDTMFSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": 
+    {
+        "event_name": {"type": "string", "enum": ["request_send_dtmf"]},
+        "event_data": 
+        {
+            "type": "object",
+            "properties": 
+            {
+                "call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+                "digits": {"type": "string", "minLength": 1}
+            },
+            "required": ["call_uuid", "digits"]
+        }
+    },
+    "required": ["event_name", "event_data"]
+})";
+
 }
