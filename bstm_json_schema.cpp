@@ -9,6 +9,8 @@ const char* ConfFileSchema = R"(
 	"eventlog_days": {"type": "integer"},
 	"max_dial_ports": {"type": "integer"},
 	"cpa_init_tone": {"type": "string"},
+	"cpa_port": {"type": "string"},
+	"cpa_server": {"type": "string"},
 	"request_queue": {"type": "string"},
 	"botaudio_buffer_size": {"type": "integer", "minLength": 20, "maxLength": 120},
 	"ira_http_proxy": {"type": "string"}
