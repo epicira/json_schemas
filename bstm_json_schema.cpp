@@ -243,26 +243,6 @@ const char* PlayUrlSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-const char* PlayTTSSchema = R"(
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-        "event_name": {"type": "string","enum": ["request_play_tts"]},
-        "event_data": {"type": "object",
-		"properties": {
-		  "call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
-		  "engine": {"type": "string", "enum" : ["standard","neural","long_form","generative"] },
-		  "text": {"type": "string"},
-		  "type": {"type": "string", "enum" : ["text","ssml"] },
-		  "voice": {"type": "string"}
-		},
-		"required": [ "call_uuid", "engine", "text","voice"]
-        }
-    },
-    "required": ["event_name", "event_data"]
-})";
-
 const char* SnoopOnCallSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
