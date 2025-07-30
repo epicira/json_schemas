@@ -18,6 +18,8 @@ const char* ConfFileSchema = R"(
 		"bot_inactivity_limit" : {"type": "integer"},
 		"result_subject": {"type": "string"},
 		"siprec_stream_leg": {"type": "string", "enum" : ["NONE","ALEG","BLEG","BOTH"] },
+		"background_audio": {"type": "string"},
+		"mix_factor": {"type": "number", "minimum": 0, "maximum": 1},
 		"request_queue": {"type": "string"}
 	},
 	"required": ["websocket_port","pstn_audio_mode","siprec_stream_leg"]
