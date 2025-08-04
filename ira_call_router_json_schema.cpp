@@ -47,23 +47,6 @@ const char* MakeCallSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* HangupEventSchema = R"(
-{
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"type": "object",
-	"properties": {
-		"event_name": {"type": "string", "enum": ["report_hangup_event"] },
-		"event_data": {"type": "object",
-		"properties" : {
-			"call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
-			"dialer_pod": {"type": "string", "minLength": 2}
-		},
-		"required": ["call_uuid","dialer_pod"] 
-		}
-	},
-	"required": [ "event_name", "event_data"]
-})";
-
 const char* AddSipGatewaySchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
@@ -91,47 +74,6 @@ const char* AddSipGatewaySchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* UpdateGatewayMapSchema = R"(
-{
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"type": "object",
-	"properties": {
-		"event_name": {"type": "string", "enum": ["request_update_gateway_mapping"] },
-		"event_data": {"type": "object",
-		"properties": {
-			"gateway_name": {"type": "string", "minLength": 2},
-			"dialer_ip_address": {"type": "string", "minLength": 2, "maxLength": 15},
-			"dialer_pod_id": {"type": "string", "minLength": 2},
-			"usage": {"type": "integer"},
-			"gateway_status": {"type": "string", "minLength": 2}
-		},
-		"required": [ "gateway_name", "dialer_pod_id", "dialer_ip_address", "gateway_status", "usage"]
-		}
-	},
-	"required": [ "event_name", "event_data"]
-})";
-
-const char* UpdateDialerInfoSchema = R"(
-{
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"type": "object",
-	"properties": {
-		"event_name": {"type": "string", "enum": ["request_update_dialer_info"] },
-		"event_data": {"type": "object",
-			"properties": {
-				"dialer_pod_id": {"type": "string", "minLength": 2},
-				"dialer_ip_address": {"type": "string", "minLength": 2, "maxLength": 15},
-				"machine_id": {"type": "string", "minLength": 2},
-				"max_channels": {"type": "integer"},
-				"usage": {"type": "integer"},
-				"dialer_state": {"type": "integer"}
-			},
-			"required": [ "dialer_ip_address", "dialer_pod_id", "machine_id", "dialer_state", "max_channels", "usage"]
-		}
-	},
-	"required": [ "event_name", "event_data"]
-})";
-
 const char* GetSipGatewayListSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
@@ -147,7 +89,6 @@ const char* GetSipGatewayListSchema = R"(
 	},
 	"required": [ "event_name", "event_data"]
 })";
-
 
 const char* ManageSipGatewaySchema = R"(
 {
