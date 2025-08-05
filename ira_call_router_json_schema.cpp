@@ -124,7 +124,7 @@ const char* AddCampaignSchema = R"(
 			"gateways": { "type": "array",
 			"items": [{"type": "object",
 			"properties": { "name": {"type": "string" },
-							"did_range": { "type": "array","items": [{"type": "string", "pattern": "^[0-9]{10}-[0-9]{10}$"}]}
+							"did_range": { "type": "array","items": [{"type": "string", "pattern": "^[0-9]{3,10}-[0-9]{3,10}$"}]}
 							},
 							"required": ["name"]}
 							]}
