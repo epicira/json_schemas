@@ -187,4 +187,76 @@ const char* InstanceActivationSchema = R"(
 	},
 	"required": [ "event_name", "event_data"]
 })";
+
+const char* IraGetQueueSizeSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "enum": ["get_queue_size"] }
+    },
+    "required": [ "event_name" ]
+})";
+
+const char* IraSetQueueParamsSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "enum": ["set_queue_params"] },
+		"event_data": {"type": "object",
+			"properties": {
+				"max_total_queue_size": {"type": "integer", "minimum": 1, "maximum": 200000},
+				"short_delay": {"type": "integer", "minimum": 5, "maximum": 10},
+				"long_delay": {"type": "integer", "minimum": 20, "maximum": 100},
+				"cps_percent": {"type": "number", "minimum": 0.1, "maximum": 1.0},
+				"enable_firing_calls": {"type": "boolean", "enum" : [true,false] },
+				"dial_timeout": {"type": "integer", "minimum": 10, "maximum": 100},
+				"working_hours": {"type": "string", "pattern": "^(?:[01]\\d|2[0-3])[0-5]\\d-(?:[01]\\d|2[0-3])[0-5]\\d$"}
+			}
+		}
+    },
+    "required": [ "event_name", "event_data"]
+})";
+
+const char* IraGetGatewayQueueSizeSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "enum": ["get_gateway_queue_size"] },
+		"event_data": {"type": "object",
+			"properties": {
+				"campaign": {"type": "string", "minLength": 1 }
+			}
+		}
+    },
+    "required": [ "event_name", "event_data"]
+})";
+
+const char* IraGetQueueParamsSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "enum": ["get_queue_params"] }
+    },
+    "required": [ "event_name", "event_data"]
+})";
+
+const char* IraRemoveCallsFromQueueSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "enum": ["remove_calls_from_queue"] },
+		"event_data": {"type": "object",
+			"properties": {
+				"campaign": {"type": "string", "minLength": 1 }
+			}
+		}
+    },
+    "required": [ "event_name", "event_data"]
+})";
+
 }
