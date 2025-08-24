@@ -169,8 +169,8 @@ const char* StartStreamingSchema = R"(
         "event_data": {"type": "object",
 		"properties": {
 			"call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
-			"websocket_host": {"type": "string", "minLength": 2, "maxLength": 60},
-			"websocket_app": {"type": "string", "minLength": 1, "maxLength": 60},
+			"websocket_host": {"type": "string", "minLength": 2, "maxLength": 200},
+			"websocket_app": {"type": "string", "minLength": 1, "maxLength": 200},
 			"websocket_port": {"type": "integer"},
 			"chunk_size": {"type": "integer", "minimum": 320, "maximum": 16000},
 			"enable_vad": {"type": "boolean", "enum" : [true,false] },
