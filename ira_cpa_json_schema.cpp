@@ -143,7 +143,7 @@ const char* TesterConfFileSchema = R"(
 			"properties": {
 				"config_name": {"type": "string" },
 				"tenant_id": {"type": "string" },
-				"analysis": {"type": "string", "enum":["amd","sit"]},
+				"analysis": {"type": "string", "enum":["amd","eamd"]},
 				"min_ambient_energy": {"type": "integer", "minimum": 100},
 				"energy_lwm": {"type": "integer", "minimum": 100},
 				"energy_hwm": {"type": "integer", "minimum": 4000},
@@ -156,7 +156,7 @@ const char* TesterConfFileSchema = R"(
 				"log_rtp_history": {"type": "boolean", "enum" : [true,false] },
 				"break_events": {"type": "string"},
 				"amd_time_limit": {"type": "integer", "minimum": 1000, "maximum": 3000},
-				"frequency_count": {"type": "integer", "minimum": 50},
+				"frequency_count": {"type": "integer", "minimum": 50, "maximum": 200},
 				"minimum_frequency": {"type": "integer", "minimum": 50, "maximum": 800},
 				"maximum_frequency": {"type": "integer", "minimum": 1000, "maximum": 6400},
 				"eamd_silence": {"type": "integer", "minimum": 600, "maximum": 1600},
