@@ -182,8 +182,8 @@ const char* StartLoadTestSchema = R"(
 		"tenant_id": {"type": "string"},
 		"config_name": {"type": "string"},
 		"simul_req": {"type": "integer"},
-		"inter_request_delay_microsecs": {"type": "integer"},
-		"batch_size_in_ms": {"type": "integer"},
+		"inter_request_delay_microsecs": {"type": "integer", "minimum": 100, "maximum": 1000000},
+		"batch_size_in_ms": {"type": "integer", "minimum": 20, "maximum": 1000},
 		"test_duration": {"type": "integer"}
     },
   "required": [ "tenant_id", "config_name","simul_req","test_duration"]
@@ -197,8 +197,8 @@ const char* StartRegressionTestSchema = R"(
 		"tenant_id": {"type": "string"},
 		"config_name": {"type": "string"},
 		"simul_req": {"type": "integer"},
-		"inter_request_delay_microsecs": {"type": "integer"},
-		"batch_size_in_ms": {"type": "integer"}
+		"inter_request_delay_microsecs": {"type": "integer", "minimum": 100, "maximum": 1000000},
+		"batch_size_in_ms": {"type": "integer", "minimum": 20, "maximum": 1000}
     },
   "required": ["tenant_id","config_name","simul_req"]
 })";
