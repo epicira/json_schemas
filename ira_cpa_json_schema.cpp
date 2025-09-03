@@ -132,9 +132,8 @@ const char* TesterConfFileSchema = R"(
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "test_file_dir": {"type": "string", "minLength": 2},
-	  "cpatest_inter_request_delay": {"type": "integer"},
-      "request_queue": {"type": "string", "minLength": 5},
+		"test_file_dir": {"type": "string", "minLength": 2},
+		"request_queue": {"type": "string", "minLength": 5},
       "cpa_params": {
       "type": "array",
       "items": [
@@ -174,3 +173,33 @@ const char* TesterConfFileSchema = R"(
     },
     "required": ["test_file_dir"]
 })";
+
+const char* StartLoadTestSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+		"tenant_id": {"type": "string"},
+		"config_name": {"type": "string"},
+		"simul_req": {"type": "integer"},
+		"inter_request_delay_microsecs": {"type": "integer"},
+		"batch_size_in_ms": {"type": "integer"},
+		"test_duration": {"type": "integer"}
+    },
+  "required": [ "tenant_id", "config_name","simul_req","test_duration"]
+})";
+
+const char* StartRegressionTestSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+		"tenant_id": {"type": "string"},
+		"config_name": {"type": "string"},
+		"simul_req": {"type": "integer"},
+		"inter_request_delay_microsecs": {"type": "integer"},
+		"batch_size_in_ms": {"type": "integer"}
+    },
+  "required": ["tenant_id","config_name","simul_req"]
+})";
+
