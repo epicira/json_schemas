@@ -12,6 +12,7 @@ const char* ConfFileSchema = R"(
 	"cpa_port": {"type": "string"},
 	"cpa_server": {"type": "string"},
 	"request_queue": {"type": "string"},
+	"call_scheduler": {"type": "string", "enum": ["none","iracallrouter","iracallsched"]},
 	"botaudio_buffer_size": {"type": "integer", "minLength": 20, "maxLength": 120},
 	"ira_http_proxy": {"type": "string"}
 	},
