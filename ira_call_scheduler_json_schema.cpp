@@ -11,7 +11,7 @@ const char* ConfFileSchema = R"(
       "enable": {"type": "boolean", "enum" : [true,false] },
       "short_delay": {"type": "integer", "minimum": 2},
       "long_delay": {"type": "integer", "minimum": 2},
-      "max_total_queue_size": {"type": "integer", "minimum": 100},
+      "max_number_buffer_size": {"type": "integer", "minimum": 100, "maximum": 10000},
       "cps_percent": {"type": "number", "maximum": 1.0},
       "dial_timeout": {"type": "integer", "minimum": 5, "maximum": 60},
       "working_hours": {"type": "string", "minLength": 5}
@@ -120,7 +120,7 @@ const char* AddCampaignSchema = R"(
 		"properties": { 
 			"name": {"type": "string", "minLength": 2, "maxLength": 55},
 			"active": {"type": "boolean", "enum" : [true,false] },
-			"queue_type": {"type": "string", "enum" : ["bot","pred","prog","preview"] },
+			"campaign_type": {"type": "string", "enum" : ["bot","pred","prog","preview"] },
 			"max_limit": {"type": "integer" }, 
 			"gateways": { "type": "array",
 			"items": [{"type": "object",
@@ -130,7 +130,7 @@ const char* AddCampaignSchema = R"(
 							"required": ["name"]}
 							]}
 		},
-		"required": ["name","queue_type","max_limit","gateways"]
+		"required": ["name","campaign_type","max_limit","gateways"]
 		}
 	},
 	"required": [ "event_name", "event_data"]
@@ -189,7 +189,7 @@ const char* InstanceActivationSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* IraGetQueueStatsSchema = R"(
+const char* IraGetCampaignStatsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -204,12 +204,12 @@ const char* IraGetQueueStatsSchema = R"(
     "required": [ "event_name" ]
 })";
 
-const char* IraGetCampaignQueueSizeSchema = R"(
+const char* IraGetCampaignSizeSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["get_campaign_queue_size"] },
+      "event_name": {"type": "string", "enum": ["get_campaign_size"] },
 		"event_data": {"type": "object",
 		"properties": {
 			"campaign": {"type": "string"}
@@ -220,15 +220,15 @@ const char* IraGetCampaignQueueSizeSchema = R"(
     "required": [ "event_name" ]
 })";
 
-const char* IraSetQueueParamsSchema = R"(
+const char* IraSetCampaignParamsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["set_queue_params"] },
+      "event_name": {"type": "string", "enum": ["set_campaign_params"] },
 		"event_data": {"type": "object",
 			"properties": {
-				"max_total_queue_size": {"type": "integer", "minimum": 1, "maximum": 200000},
+				"max_number_buffer_size": {"type": "integer", "minimum": 100, "maximum": 10000},
 				"short_delay": {"type": "integer", "minimum": 5, "maximum": 10},
 				"long_delay": {"type": "integer", "minimum": 20, "maximum": 100},
 				"cps_percent": {"type": "number", "minimum": 0.1, "maximum": 1.0},
@@ -241,22 +241,22 @@ const char* IraSetQueueParamsSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-const char* IraGetQueueParamsSchema = R"(
+const char* IraGetCampaignParamsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["get_queue_params"] }
+      "event_name": {"type": "string", "enum": ["get_campaign_params"] }
     },
     "required": [ "event_name", "event_data"]
 })";
 
-const char* IraRemoveCallsFromQueueSchema = R"(
+const char* IraRemoveCallsFromCampaignSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["remove_calls_from_queue"] },
+      "event_name": {"type": "string", "enum": ["remove_calls_from_campaign"] },
 		"event_data": {"type": "object",
 			"properties": {
 				"campaign": {"type": "string", "minLength": 1 }
