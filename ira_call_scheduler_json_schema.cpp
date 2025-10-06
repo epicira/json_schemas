@@ -14,7 +14,7 @@ const char* ConfFileSchema = R"(
       "max_number_buffer_size": {"type": "integer", "minimum": 100, "maximum": 10000},
       "cps_percent": {"type": "number", "maximum": 1.0},
       "dial_timeout": {"type": "integer", "minimum": 5, "maximum": 60},
-      "working_hours": {"type": "string", "minLength": 5}
+      "working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"}
     },
     "required": ["dialer_app", "working_hours"]
 })";
@@ -121,6 +121,7 @@ const char* AddCampaignSchema = R"(
 			"name": {"type": "string", "minLength": 2, "maxLength": 55},
 			"active": {"type": "boolean", "enum" : [true,false] },
 			"campaign_type": {"type": "string", "enum" : ["bot","pred","prog","preview"] },
+			"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"},
 			"max_limit": {"type": "integer" }, 
 			"gateways": { "type": "array",
 			"items": [{"type": "object",
@@ -146,8 +147,10 @@ const char* ManageCampaignSchema = R"(
 		"properties": {
 			"name": {"type": "string", "minLength": 2, "maxLength": 55},
 			"active": {"type": "boolean", "enum" : [true,false] },
+			"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"},
 			"max_limit": {"type": "integer" } 
 		},
+		"oneOf": [{"required": ["active"]},{"required": ["max_limit"]},{"required": ["working_hours"]}],
 		"required": [ "name"]
 		}
 	},
@@ -234,7 +237,7 @@ const char* IraSetCampaignParamsSchema = R"(
 				"cps_percent": {"type": "number", "minimum": 0.1, "maximum": 1.0},
 				"enable_firing_calls": {"type": "boolean", "enum" : [true,false] },
 				"dial_timeout": {"type": "integer", "minimum": 10, "maximum": 100},
-				"working_hours": {"type": "string", "pattern": "^(?:[01]\\d|2[0-3])[0-5]\\d-(?:[01]\\d|2[0-3])[0-5]\\d$"}
+				"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"}
 			}
 		}
     },
