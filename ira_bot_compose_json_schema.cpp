@@ -16,3 +16,14 @@ const char* ConfFileSchema = R"(
 	"anyOf": [{"required": ["ws_port"]},{"required": ["wss_port"]}],
     "required": ["use_self_signed_certificate"]
 })";
+
+const char* IraRequestSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "pattern": "^request_" },
+      "event_data": {"type": "object"}
+    },
+    "required": [ "event_name", "event_data"]
+})";
