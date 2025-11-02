@@ -119,6 +119,7 @@ const char* AddCampaignSchema = R"(
 		"event_data": {"type": "object",
 		"properties": { 
 			"name": {"type": "string", "minLength": 2, "maxLength": 55},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
 			"active": {"type": "boolean", "enum" : [true,false] },
 			"campaign_type": {"type": "string", "enum" : ["bot","pred","prog","preview"] },
 			"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"},
@@ -131,7 +132,7 @@ const char* AddCampaignSchema = R"(
 							"required": ["name"]}
 							]}
 		},
-		"required": ["name","campaign_type","max_limit","gateways"]
+		"required": ["name","tenant_id","campaign_type","max_limit","gateways"]
 		}
 	},
 	"required": [ "event_name", "event_data"]
@@ -146,12 +147,13 @@ const char* ManageCampaignSchema = R"(
 		"event_data": {"type": "object",
 		"properties": {
 			"name": {"type": "string", "minLength": 2, "maxLength": 55},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
 			"active": {"type": "boolean", "enum" : [true,false] },
 			"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"},
 			"max_limit": {"type": "integer" } 
 		},
 		"oneOf": [{"required": ["active"]},{"required": ["max_limit"]},{"required": ["working_hours"]}],
-		"required": [ "name"]
+		"required": [ "name","tenant_id"]
 		}
 	},
 	"required": [ "event_name", "event_data"]
@@ -165,9 +167,10 @@ const char* DeleteCampaignSchema = R"(
 		"event_name": {"type": "string", "enum": ["request_delete_campaign"] },
 		"event_data": {"type": "object",
 		"properties": {
-		"name": {"type": "string", "minLength": 2, "maxLength": 55}
+			"name": {"type": "string", "minLength": 2, "maxLength": 55},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20}
 		},
-		"required": [ "name"]
+		"required": [ "name","tenant_id"]
 		}
 	},
 	"required": [ "event_name", "event_data"]
@@ -200,8 +203,10 @@ const char* IraGetCampaignStatsSchema = R"(
       "event_name": {"type": "string", "enum": ["get_campaign_stats"] },
 		"event_data": {"type": "object",
 		"properties": {
-			"campaign": {"type": "string"}
-			}
+			"campaign": {"type": "string"},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20}
+			},
+			"required": ["campaign","tenant_id"]		
 		}
 	},
     "required": [ "event_name" ]
@@ -215,9 +220,10 @@ const char* IraGetCampaignSizeSchema = R"(
       "event_name": {"type": "string", "enum": ["get_campaign_size"] },
 		"event_data": {"type": "object",
 		"properties": {
-			"campaign": {"type": "string"}
+			"campaign": {"type": "string"},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20}
 			},
-		"required": [ "campaign"]		
+			"required": [ "campaign","tenant_id"]		
 		}
 	},
     "required": [ "event_name" ]
@@ -262,8 +268,10 @@ const char* IraRemoveCallsFromCampaignSchema = R"(
       "event_name": {"type": "string", "enum": ["remove_calls_from_campaign"] },
 		"event_data": {"type": "object",
 			"properties": {
-				"campaign": {"type": "string", "minLength": 1 }
-			}
+				"campaign": {"type": "string", "minLength": 1 },
+				"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20}
+			},
+			"required": ["campaign","tenant_id"]		
 		}
     },
     "required": [ "event_name", "event_data"]
@@ -278,9 +286,10 @@ const char* IraDialPredictiveSchema = R"(
 		"event_data": {"type": "object",
 			"properties": {
 				"campaign": {"type": "string", "minLength": 1 },
+				"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
 				"dial_schedule": { "type": "array","items": [{"type": "integer"}]}
 			},
-			"required": ["campaign", "dial_schedule"]		
+			"required": ["campaign","tenant_id", "dial_schedule"]		
 		}
     },
     "required": [ "event_name", "event_data"]
@@ -295,9 +304,10 @@ const char* IraDialProgressiveSchema = R"(
 		"event_data": {"type": "object",
 			"properties": {
 				"campaign": {"type": "string", "minLength": 1 },
+				"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
 				"dial_count": {"type": "integer", "minimum": 1}
 			},
-			"required": ["campaign", "dial_count"]		
+			"required": ["campaign","tenant_id", "dial_count"]		
 		}
     },
     "required": [ "event_name", "event_data"]

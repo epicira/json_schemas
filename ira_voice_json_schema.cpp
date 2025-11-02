@@ -264,43 +264,6 @@ const char* SnoopOnCallSchema = R"(
 })";
 
 
-const char* AddSipGatewayDefSchema = R"(
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-		"event_name": {"type": "string","enum": ["request_add_sip_gateway_def"]},
-		"event_data": {"type": "object",
-			"properties": {
-			  "name": {"type": "string", "minLength": 2, "maxLength": 30},
-			  "sip_profile": {"type": "string", "minLength": 2, "maxLength": 15},
-			  "gateway_definition": {"type": "string"},
-			  "sip_proxy": {"type": "string"},
-			  "dialer_ip_list": { "type": "array","items": [{"type": "string"}]}
-			},
-		  "required": [ "name", "sip_profile", "gateway_definition", "dialer_ip_list" ]
-        }
-    },
-    "required": ["event_name", "event_data"]
-})";
-
-const char* DeleteSipGatewaySchema = R"(
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-		"event_name": {"type": "string","enum": ["request_delete_sip_gateway"]},
-		"event_data": {"type": "object",
-		"properties": {
-			"name": {"type": "string", "minLength": 2, "maxLength": 30},
-			"sip_profile": {"type": "string", "minLength": 2, "maxLength": 15}
-		},
-		"required": [ "name", "sip_profile"]
-        }
-    },
-    "required": ["event_name", "event_data"]
-})";
-
 const char* SelectSIPFieldsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
