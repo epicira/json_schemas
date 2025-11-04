@@ -48,27 +48,19 @@ const char* MakeCallSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-const char* BridgeCallSchema = R"(
+const char* BridgeCallsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["request_bridge_call"] },
-      "event_data": {"type": "object",
+      "event_name": {"type": "string", "enum": ["request_bridge_calls"] },
+        "event_data": {"type": "object",
 			"properties": {
-			  "bridge_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
-			  "gateway": {"type": "string", "minLength": 2, "maxLength": 60},
-			  "campaign": {"type": "string", "minLength": 2, "maxLength": 60},
-			  "to_number": {"type": "string", "minLength": 3, "maxLength": 25},
-			  "from_number": {"type": "string", "maxLength": 25},
-			  "stop_stream": {"type": "boolean", "enum" : [true,false] },
-			  "channel_vars": {"type": "object"},
-			  "merge_later": {"type": "boolean", "enum" : [true,false] },
-			  "dial_timeout": {"type": "integer", "minimum": 5},
-			  "call_params": {"type": "object"}
+				"first_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+				"second_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
 			},
-		  "required": [ "gateway", "to_number", "stop_stream","bridge_uuid" ]
-		}
+			"required": [ "first_uuid", "second_uuid"]
+        }
     },
     "required": [ "event_name", "event_data"]
 })";
@@ -207,23 +199,6 @@ const char* TransferCallSchema = R"(
 				"destination": {"type": "string", "minLength": 2, "maxLength": 100}
 			},
 			"required": [ "call_uuid", "destination"]
-        }
-    },
-    "required": ["event_name", "event_data"]
-})";
-
-const char* MergeCallsSchema = R"(
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-        "event_name": {"type": "string","enum": ["request_merge_calls"]},
-        "event_data": {"type": "object",
-			"properties": {
-				"first_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
-				"second_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
-			},
-			"required": [ "first_uuid", "second_uuid"]
         }
     },
     "required": ["event_name", "event_data"]
