@@ -9,6 +9,7 @@ const char* ConfFileSchema = R"(
     "properties": {
       "dialer_app": {"type": "string", "minLength": 2},
       "enable": {"type": "boolean", "enum" : [true,false] },
+      "strict_limits": {"type": "boolean", "enum" : [true,false] },
       "short_delay": {"type": "integer", "minimum": 2},
       "long_delay": {"type": "integer", "minimum": 2},
       "max_number_buffer_size": {"type": "integer", "minimum": 100, "maximum": 10000},
@@ -242,6 +243,7 @@ const char* IraSetCampaignParamsSchema = R"(
 				"long_delay": {"type": "integer", "minimum": 20, "maximum": 100},
 				"cps_percent": {"type": "number", "minimum": 0.1, "maximum": 1.0},
 				"enable_firing_calls": {"type": "boolean", "enum" : [true,false] },
+				"strict_limits": {"type": "boolean", "enum" : [true,false] },
 				"dial_timeout": {"type": "integer", "minimum": 10, "maximum": 100},
 				"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"}
 			}
