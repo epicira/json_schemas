@@ -5,9 +5,25 @@ const char* ConfFileSchema = R"(
     "properties": {
 		"websocket_app": {"type": "string", "minLength": 1, "maxLength": 60},
 		"websocket_port": {"type": "integer"},
-		"pstn_audio_mode": {"type": "string", "enum" : ["stream","vad"] },
-		"speech_threshold" : {"type": "integer"},
-		"silence_threshold" : {"type": "integer", "minimum": 1, "maximum": 20},
+		"vad": {"type": "string", "enum" : ["no","dsp","onnx"] },
+		"log_vad_events": {"type": "boolean", "enum" : [true,false], "default": false },
+		"enable_pre_silence": {"type": "boolean", "enum" : [true,false], "default": false },
+		"vad_max_speech_duration_sec" : {"type": "integer", "default": 60},
+		"dsp_vad_params": {"type": "object",
+		"properties": {
+			"speech_threshold" : {"type": "integer", "minimum": 200, "maximum": 800, "default": 500},
+			"silence_threshold_ms" : {"type": "integer", "minimum": 200, "maximum": 2000, "default": 800},
+			"vad_audio_limit" : {"type": "integer", "minimum": 2, "default": 20}
+			}
+		},
+		"onnx_vad_params": {"type": "object",
+		"properties": {
+			"frame_size_ms" : {"type": "integer", "enum": [32,64,96], "default": 32},
+			"min_silence_ms" : {"type": "integer", "default": 100},
+			"min_speech_ms" : {"type": "integer", "default": 250},
+			"prob_threshold" : {"type": "number", "minimum": 0.2, "maximum": 0.9, "default": 0.5}
+			}
+		},
 		"record": {"type": "string", "enum" : ["none","mp3","wav"] },
 		"mp3_quality": {"type": "integer", "minimum": 0, "maximum": 9},
 		"induce_error": {"type": "boolean", "enum" : [true,false] },
@@ -22,6 +38,6 @@ const char* ConfFileSchema = R"(
 		"mix_factor": {"type": "number", "minimum": 0, "maximum": 1},
 		"request_queue": {"type": "string"}
 	},
-	"required": ["websocket_port","pstn_audio_mode","siprec_stream_leg"]
+	"required": ["websocket_port","vad","siprec_stream_leg"]
 })";
 
