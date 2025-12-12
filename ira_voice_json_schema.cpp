@@ -174,17 +174,18 @@ const char* StartStreamingSchema = R"(
 			"vad_max_speech_duration_sec" : {"type": "integer", "default": 60},
 			"dsp_vad_params": {"type": "object",
 			"properties": {
-				"speech_threshold" : {"type": "integer", "minimum": 200, "maximum": 800, "default": 500},
-				"silence_threshold_ms" : {"type": "integer", "minimum": 200, "maximum": 2000, "default": 800},
-				"vad_audio_limit" : {"type": "integer", "minimum": 2, "default": 20}
+				"speech_threshold" : {"type": "integer", "minimum": 200, "maximum": 800, "default": 500, "description": "Threshold for speech detection"},
+				"silence_threshold_ms" : {"type": "integer", "minimum": 200, "maximum": 2000, "default": 800, "description": "Threshold for silence detection"},
+				"vad_audio_limit" : {"type": "integer", "minimum": 2, "default": 20, "description": "Don't change this"}
 				}
 			},
 			"onnx_vad_params": {"type": "object",
 			"properties": {
-				"frame_size_ms" : {"type": "integer", "enum": [32,64,96], "default": 32},
-				"min_silence_ms" : {"type": "integer", "default": 100},
-				"min_speech_ms" : {"type": "integer", "default": 250},
-				"prob_threshold" : {"type": "number", "minimum": 0.2, "maximum": 0.9, "default": 0.5}
+				"frame_size_ms" : {"type": "integer", "enum": [32,64,96], "default": 32, "description": "VAD processing Frame size in milliseconds"},
+				"min_silence_ms" : {"type": "integer", "default": 600, "description": "Minimum silence duration in milliseconds"},
+				"min_speech_ms" : {"type": "integer", "default": 250, "description": "Minimum speech duration in milliseconds"},
+				"speech_threshold" : {"type": "number", "minimum": 0.4, "maximum": 0.9, "default": 0.6, "description": "Probability of speech"},
+				"silence_threshold" : {"type": "number", "minimum": 0.05, "maximum": 0.35, "default": 0.2, "description": "Probability of silence"}
 				}
 			},
 			"streaming_botaudio": {"type": "boolean", "enum" : [true,false] },
