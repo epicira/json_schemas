@@ -93,6 +93,7 @@ const char* RecordActionSchema = R"(
 		"event_data": {"type": "object",
 		"properties": {
 			"call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+			"file_name": {"type": "string"},
 			"mp3_quality": {"type": "integer", "minimum": 0, "maximum": 9},
 			"format": {"type": "string", "enum" : ["mp3","wav"] }
 		},
