@@ -189,7 +189,8 @@ const char* StartStreamingSchema = R"(
 				"silence_threshold" : {"type": "number", "minimum": 0.05, "maximum": 0.35, "default": 0.2, "description": "Probability of silence"}
 				}
 			},
-			"streaming_botaudio": {"type": "boolean", "enum" : [true,false] },
+			"streaming_pstnaudio": {"type": "boolean", "enum" : [true,false], "default": true },
+			"streaming_botaudio": {"type": "boolean", "enum" : [true,false], "default": false },
 			"dropcall_on_break": {"type": "boolean", "enum" : [true,false] },
 			"brotli_quality": {"type": "integer", "minimum": 0, "maximum": 11},
 			"bot_inactivity_limit" : {"type": "integer", "minimum": 0, "maximum": 120},
