@@ -6,7 +6,7 @@ const char* ConfFileSchema = R"(
 		"websocket_app": {"type": "string", "minLength": 1, "maxLength": 60},
 		"websocket_port": {"type": "integer"},
 		"vad": {"type": "string", "enum" : ["no","dsp","onnx"] },
-		"streaming_pstnaudio": {"type": "boolean", "enum" : [true,false], "default": true },
+		"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 		"log_vad_events": {"type": "boolean", "enum" : [true,false], "default": false },
 		"enable_pre_silence": {"type": "boolean", "enum" : [true,false], "default": false },
 		"vad_max_speech_duration_sec" : {"type": "integer", "default": 60},

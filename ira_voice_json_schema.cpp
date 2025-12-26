@@ -4,19 +4,18 @@ const char* ConfFileSchema = R"(
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-    "fs_event_log": {"type": "string", "enum": ["none","call_events","all_events"] },
-	"dial_timeout": {"type": "integer"},
-	"eventlog_days": {"type": "integer"},
-	"max_dial_ports": {"type": "integer"},
-	"cpa_init_tone": {"type": "string"},
-	"cpa_port": {"type": "string"},
-	"cpa_server": {"type": "string"},
-	"request_queue": {"type": "string"},
-	"onnx_model_path": {"type": "string"},
-	"onnx_core_count": {"type": "integer"},
-	"call_scheduler": {"type": "string", "enum": ["none","iracallscheduler"]},
-	"botaudio_buffer_size": {"type": "integer", "minLength": 20, "maxLength": 120},
-	"ira_http_proxy": {"type": "string"}
+    "fs_event_log": {"type": "string", "enum": ["none","call_events","all_events"], "default": "none", "description": "Call event logging level, use only for development or testing"},
+	"dial_timeout": {"type": "integer", "default": 30, "description": "Timeout for dialing in seconds"},
+	"eventlog_days": {"type": "integer", "default": 7, "description": "Number of days to keep event logs"},
+	"max_dial_ports": {"type": "integer", "default": 40, "description": "Maximum concurrent number of dial ports. <max(20 x cpu_count or value specified)>"},
+	"cpa_init_tone": {"type": "string", "default": "<tone_stream://%(200,0,500)>", "description": "Initial tone for CPA"},
+	"cpa_port": {"type": "string", "default": "8331", "description": "Port for CPA"},
+	"cpa_server": {"type": "string", "default": "<<local_ip>>", "description": "Server for CPA"},
+	"request_queue": {"type": "string", "default": "<cluster_id>.iravoice.request", "description": "Request queue for the service"},
+	"onnx_model_path": {"type": "string", "default": "", "description": "Path to the ONNX model"},
+	"onnx_core_count": {"type": "integer", "default": 2, "description": "Number of cores for ONNX"},
+	"call_scheduler": {"type": "string", "enum": ["none","iracallscheduler"], "default": "none", "description": "Call scheduler type"},
+	"botaudio_buffer_size": {"type": "integer", "minLength": 20, "maxLength": 120, "description": "Buffer size for bot audio"}
 	},
 	"required": [ ]
 })";
@@ -189,7 +188,7 @@ const char* StartStreamingSchema = R"(
 				"silence_threshold" : {"type": "number", "minimum": 0.05, "maximum": 0.35, "default": 0.2, "description": "Probability of silence"}
 				}
 			},
-			"streaming_pstnaudio": {"type": "boolean", "enum" : [true,false], "default": true },
+			"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 			"streaming_botaudio": {"type": "boolean", "enum" : [true,false], "default": false },
 			"dropcall_on_break": {"type": "boolean", "enum" : [true,false] },
 			"brotli_quality": {"type": "integer", "minimum": 0, "maximum": 11},
