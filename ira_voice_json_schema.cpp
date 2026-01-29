@@ -191,7 +191,7 @@ const char* StartStreamingSchema = R"(
 			"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 			"streaming_botaudio": {"type": "boolean", "enum" : [true,false], "default": false },
 			"dropcall_on_break": {"type": "boolean", "enum" : [true,false] },
-			"brotli_quality": {"type": "integer", "minimum": 0, "maximum": 11},
+			"encode_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 			"bot_inactivity_limit" : {"type": "integer", "minimum": 0, "maximum": 120},
 			"more_call_params": {"type": "object"},
 			"background_audio": {"type": "string"},
