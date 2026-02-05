@@ -15,7 +15,7 @@ const char* ConfFileSchema = R"(
 	"onnx_model_path": {"type": "string", "default": "", "description": "Path to the ONNX model"},
 	"onnx_core_count": {"type": "integer", "default": 2, "description": "Number of cores for ONNX"},
 	"call_scheduler": {"type": "string", "enum": ["none","iracallscheduler"], "default": "none", "description": "Call scheduler type"},
-	"botaudio_buffer_size": {"type": "integer", "minLength": 20, "maxLength": 120, "description": "Buffer size for bot audio"}
+	"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"}
 	},
 	"required": [ ]
 })";
@@ -71,8 +71,7 @@ const char* SimpleCallActionSchema = R"(
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
 	"properties": {
-		"event_name": {"type": "string", "enum": ["request_drop_call",
-					"request_stop_stream","request_stop_record","request_stop_play"] },
+		"event_name": {"type": "string", "enum": ["request_drop_call","request_pause_play","request_resume_play","request_stop_stream","request_stop_record","request_stop_play"] },
 		"event_data": {"type": "object",
 		"properties": {
 				  "call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
@@ -189,7 +188,7 @@ const char* StartStreamingSchema = R"(
 				}
 			},
 			"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
-			"streaming_botaudio": {"type": "boolean", "enum" : [true,false], "default": false },
+			"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "description": "Buffer size for botaudio in seconds"},
 			"dropcall_on_break": {"type": "boolean", "enum" : [true,false] },
 			"encode_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 			"bot_inactivity_limit" : {"type": "integer", "minimum": 0, "maximum": 120},
