@@ -71,7 +71,7 @@ const char* SimpleCallActionSchema = R"(
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
 	"properties": {
-		"event_name": {"type": "string", "enum": ["request_drop_call","request_pause_play","request_resume_play","request_stop_stream","request_stop_record","request_stop_play"] },
+		"event_name": {"type": "string", "enum": ["request_drop_call","request_pause_play","request_clear_play","request_resume_play","request_stop_stream","request_stop_record","request_stop_play"] },
 		"event_data": {"type": "object",
 		"properties": {
 				  "call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
