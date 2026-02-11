@@ -369,4 +369,14 @@ const char* SendDTMFSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
+const char* FSReloadXmlSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+			"event_name": {"type": "string","enum": ["request_reload_xml"]}
+        },
+    "required": ["event_name"]
+})";
+
 }
