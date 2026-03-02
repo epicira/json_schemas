@@ -168,6 +168,7 @@ const char* StartStreamingSchema = R"(
 			"websocket_port": {"type": "integer"},
 			"stream_frame_size_ms": {"type": "integer", "minimum": 100, "maximum": 400, "default": 200},
 			"vad": {"type": "string", "enum" : ["no","dsp","onnx"] },
+			"stream_dir": {"type": "string", "enum" : ["user_only","bot_only","duplex"], "default" : "duplex" },
 			"log_vad_events": {"type": "boolean", "enum" : [true,false], "default": false },
 			"enable_pre_silence": {"type": "boolean", "enum" : [true,false], "default": false },
 			"vad_max_speech_duration_sec" : {"type": "integer", "default": 60},

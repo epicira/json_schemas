@@ -8,6 +8,7 @@ const char* ConfFileSchema = R"(
 		"encode_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 		"log_audio": {"type": "boolean", "enum" : [true,false], "default": false },
 		"vad": {"type": "string", "enum" : ["no","dsp","onnx"] },
+		"stream_type": {"type": "string", "enum" : ["user_only","bot_only","duplex"] },
 		"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 		"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"},
 		"log_vad_events": {"type": "boolean", "enum" : [true,false], "default": false },
