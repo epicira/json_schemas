@@ -13,6 +13,7 @@ const char* ConfFileSchema = R"(
 		"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"},
 		"log_vad_events": {"type": "boolean", "enum" : [true,false], "default": false },
 		"enable_pre_silence": {"type": "boolean", "enum" : [true,false], "default": false },
+		"stream_frame_size_ms": {"type": "integer", "minimum": 20, "maximum": 400, "default": 200},
 		"vad_max_speech_duration_sec" : {"type": "integer", "default": 60},
 		"dsp_vad_params": {"type": "object",
 		"properties": {
