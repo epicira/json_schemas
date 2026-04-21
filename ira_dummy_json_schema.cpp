@@ -43,6 +43,9 @@ const char* ConfFileSchema = R"(
 		"siprec_stream_leg": {"type": "string", "enum" : ["NONE","ALEG","BLEG","BOTH"] },
 		"background_audio": {"type": "string"},
 		"mix_factor": {"type": "number", "minimum": 0, "maximum": 1},
+		"resample_rate": {"type": "integer", "minimum": 8000, "maximum": 48000},
+		"resample_quality": {"type": "integer", "minimum": 0, "maximum": 10, "default": 5},		
+		"bot_sample_rate": {"type": "integer", "minimum": 8000, "maximum": 48000},
 		"request_queue": {"type": "string"}
 	},
 	"required": ["websocket_port","vad","siprec_stream_leg"]

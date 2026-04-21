@@ -196,9 +196,9 @@ const char* StartStreamingSchema = R"(
 			"more_call_params": {"type": "object"},
 			"background_audio": {"type": "string"},
 			"mix_factor": {"type": "number", "minimum": 0, "maximum": 1},		
-			"resample_rate": {"type": "integer"}, // 0 means don't resample, send whatever sent by the SIP trunk
+			"resample_rate": {"type": "integer", "minimum": 8000, "maximum": 48000},
 			"resample_quality": {"type": "integer", "minimum": 0, "maximum": 10, "default": 5},		
-			"bot_sample_rate": {"type": "integer"},
+			"bot_sample_rate": {"type": "integer", "minimum": 8000, "maximum": 48000},
 			"initial_botaudio_delay_threshold" : {"type": "integer", "minimum": 1, "maximum": 20}
 		},
 		"required": [ "call_uuid", "websocket_host", "websocket_port","vad" ]
