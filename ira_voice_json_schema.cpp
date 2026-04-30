@@ -23,6 +23,20 @@ const char* ConfFileSchema = R"(
 namespace iravoice
 {
 
+const char* WebSocketEventSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "utc_time": {"type": "integer"},
+        "write_time": {"type": "integer"},
+        "botcompose_on": {"type": "integer"},
+        "request": {"type": "string", "enum": ["pause_play", "resume_play", "clear_play", "send_dtmf"]},
+        "digits": {"type": "string", "pattern": "^[0-9*#]+$", "minLength": 1}
+    },
+    "additionalProperties": true
+})";
+
 const char* MakeCallSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
