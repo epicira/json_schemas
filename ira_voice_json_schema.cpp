@@ -13,8 +13,6 @@ const char* ConfFileSchema = R"(
 	"cpa_server": {"type": "string", "default": "<<local_ip>>", "description": "Server for CPA"},
 	"request_queue": {"type": "string", "default": "<cluster_id>.iravoice.request", "description": "Request queue for the service"},
 	"hush_model_path": {"type": "string", "default": "", "description": "Path to the Hush Denoiser ONNX model"},
-	"silero_model_path": {"type": "string", "default": "", "description": "Path to the Silero VAD ONNX model"},
-	"silero_core_count": {"type": "integer", "default": 2, "description": "Number of cores for Silero VAD ONNX"},
 	"call_scheduler": {"type": "string", "enum": ["none","iracallscheduler"], "default": "none", "description": "Call scheduler type"},
 	"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"}
 	},
@@ -182,7 +180,7 @@ const char* StartStreamingSchema = R"(
 			"websocket_app": {"type": "string", "minLength": 1, "maxLength": 200},
 			"websocket_port": {"type": "integer"},
 			"stream_frame_size_ms": {"type": "integer", "minimum": 20, "maximum": 400, "default": 200},
-			"vad": {"type": "string", "enum" : ["no","dsp","onnx"] },
+			"vad": {"type": "string", "enum" : ["no","dsp","webrtc"] },
 			"stream_dir": {"type": "string", "enum" : ["user_only","bot_only","duplex"], "default" : "duplex" },
 			"log_vad_events": {"type": "boolean", "enum" : [true,false], "default": false },
 			"enable_pre_silence": {"type": "boolean", "enum" : [true,false], "default": false },
@@ -194,13 +192,10 @@ const char* StartStreamingSchema = R"(
 				"vad_audio_limit" : {"type": "integer", "minimum": 2, "default": 20, "description": "Don't change this"}
 				}
 			},
-			"onnx_vad_params": {"type": "object",
+			"webrtc_vad_params": {"type": "object",
 			"properties": {
-				"frame_size_ms" : {"type": "integer", "enum": [32,64,96], "default": 32, "description": "VAD processing Frame size in milliseconds"},
-				"min_silence_ms" : {"type": "integer", "default": 600, "description": "Minimum silence duration in milliseconds"},
-				"min_speech_ms" : {"type": "integer", "default": 250, "description": "Minimum speech duration in milliseconds"},
-				"speech_threshold" : {"type": "number", "minimum": 0.4, "maximum": 0.9, "default": 0.6, "description": "Probability of speech"},
-				"silence_threshold" : {"type": "number", "minimum": 0.05, "maximum": 0.35, "default": 0.2, "description": "Probability of silence"}
+				"silence_threshold_ms" : {"type": "integer", "minimum": 200, "maximum": 2000, "default": 800, "description": "Threshold for silence detection"},
+				"vad_strength" : {"type": "integer", "enum" : [0,1,2,3], "default" : 0, "description": "0 = Normal, 1 = Low Bitrate, 2 = Aggressive, 3 = Very Aggressive" }
 				}
 			},
 			"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
@@ -211,7 +206,8 @@ const char* StartStreamingSchema = R"(
 			"more_call_params": {"type": "object"},
 			"background_audio": {"type": "string"},
 			"mix_factor": {"type": "number", "minimum": 0, "maximum": 1},		
-			"denoise": {"type": "boolean", "enum" : [true,false], "default": false },
+			"denoise": {"type": "string", "enum" : ["none","low","moderate", "high", "very_high","hush"], "default": "none" },
+			"webrtc_agc": {"type": "boolean", "enum" : [true,false], "default": false },
 			"resample_rate": {"type": "integer", "minimum": 8000, "maximum": 48000},
 			"resample_quality": {"type": "integer", "minimum": 0, "maximum": 10, "default": 5},		
 			"bot_sample_rate": {"type": "integer", "minimum": 8000, "maximum": 48000},

@@ -7,7 +7,7 @@ const char* ConfFileSchema = R"(
 		"websocket_port": {"type": "integer"},
 		"encode_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 		"log_audio": {"type": "boolean", "enum" : [true,false], "default": false },
-		"vad": {"type": "string", "enum" : ["no","dsp","onnx"] },
+		"vad": {"type": "string", "enum" : ["no","dsp","webrtc"] },
 		"stream_type": {"type": "string", "enum" : ["user_only","bot_only","duplex"] },
 		"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 		"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"},
@@ -22,13 +22,10 @@ const char* ConfFileSchema = R"(
 			"vad_audio_limit" : {"type": "integer", "minimum": 2, "default": 20, "description": "Don't change this"}
 			}
 		},
-		"onnx_vad_params": {"type": "object",
+		"webrtc_vad_params": {"type": "object",
 		"properties": {
-			"frame_size_ms" : {"type": "integer", "enum": [32,64,96], "default": 32, "description": "VAD processing Frame size in milliseconds"},
-			"min_silence_ms" : {"type": "integer", "default": 600, "description": "Minimum silence duration in milliseconds"},
-			"min_speech_ms" : {"type": "integer", "default": 250, "description": "Minimum speech duration in milliseconds"},
-			"speech_threshold" : {"type": "number", "minimum": 0.4, "maximum": 0.9, "default": 0.6, "description": "Probability of speech"},
-			"silence_threshold" : {"type": "number", "minimum": 0.05, "maximum": 0.35, "default": 0.2, "description": "Probability of silence"}
+			"silence_threshold_ms" : {"type": "integer", "minimum": 200, "maximum": 2000, "default": 800, "description": "Threshold for silence detection"},
+			"vad_strength" : {"type": "integer", "enum" : [0,1,2,3], "default" : 0, "description": "0 = Normal, 1 = Low Bitrate, 2 = Aggressive, 3 = Very Aggressive" }
 			}
 		},
 		"record": {"type": "string", "enum" : ["none","mp3","wav"] },
@@ -43,7 +40,8 @@ const char* ConfFileSchema = R"(
 		"siprec_stream_leg": {"type": "string", "enum" : ["NONE","ALEG","BLEG","BOTH"] },
 		"background_audio": {"type": "string"},
 		"mix_factor": {"type": "number", "minimum": 0, "maximum": 1},
-		"denoise": {"type": "boolean", "enum" : [true,false], "default": false },
+		"denoise": {"type": "string", "enum" : ["none","low","moderate", "high", "very_high","hush"], "default": "none" },
+		"webrtc_agc": {"type": "boolean", "enum" : [true,false], "default": false },
 		"resample_rate": {"type": "integer", "minimum": 8000, "maximum": 48000},
 		"resample_quality": {"type": "integer", "minimum": 0, "maximum": 10, "default": 5},		
 		"bot_sample_rate": {"type": "integer", "minimum": 8000, "maximum": 48000},
