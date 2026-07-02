@@ -7,7 +7,7 @@ const char* ConfFileSchema = R"(
 		"websocket_port": {"type": "integer"},
 		"encode_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 		"log_audio": {"type": "boolean", "enum" : [true,false], "default": false },
-		"vad": {"type": "string", "enum" : ["no","dsp","webrtc"] },
+		"vad": {"type": "string", "enum" : ["no","dsp","webrtc","silero"] },
 		"stream_type": {"type": "string", "enum" : ["user_only","bot_only","duplex"] },
 		"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
 		"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"},
@@ -26,6 +26,13 @@ const char* ConfFileSchema = R"(
 		"properties": {
 			"silence_threshold_ms" : {"type": "integer", "minimum": 200, "maximum": 2000, "default": 800, "description": "Threshold for silence detection"},
 			"vad_strength" : {"type": "integer", "enum" : [0,1,2,3], "default" : 0, "description": "0 = Normal, 1 = Low Bitrate, 2 = Aggressive, 3 = Very Aggressive" }
+			}
+		},
+		"silero_vad_params": {"type": "object",
+		"properties": {
+			"min_silence_ms" : {"type": "integer", "default": 100, "description": "Minimum silence duration in milliseconds"},
+			"min_speech_ms" : {"type": "integer", "default": 250, "description": "Minimum speech duration in milliseconds"},
+			"speech_threshold" : {"type": "number", "minimum": 0.4, "maximum": 0.9, "default": 0.5, "description": "Probability of speech"}
 			}
 		},
 		"record": {"type": "string", "enum" : ["none","mp3","wav"] },

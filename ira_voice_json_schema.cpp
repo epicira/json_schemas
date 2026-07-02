@@ -13,6 +13,8 @@ const char* ConfFileSchema = R"(
 	"cpa_server": {"type": "string", "default": "<<local_ip>>", "description": "Server for CPA"},
 	"request_queue": {"type": "string", "default": "<cluster_id>.iravoice.request", "description": "Request queue for the service"},
 	"hush_model_path": {"type": "string", "default": "", "description": "Path to the Hush Denoiser ONNX model"},
+	"silero_core_count": {"type": "integer", "default": 30, "description": "Number of cores for Silero VAD"},
+	"silero_model_path": {"type": "string", "default": "", "description": "Path to the Silero VAD ONNX model"},
 	"call_scheduler": {"type": "string", "enum": ["none","iracallscheduler"], "default": "none", "description": "Call scheduler type"},
 	"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"}
 	},
@@ -180,7 +182,7 @@ const char* StartStreamingSchema = R"(
 			"websocket_app": {"type": "string", "minLength": 1, "maxLength": 200},
 			"websocket_port": {"type": "integer"},
 			"stream_frame_size_ms": {"type": "integer", "minimum": 20, "maximum": 400, "default": 200},
-			"vad": {"type": "string", "enum" : ["no","dsp","webrtc"] },
+			"vad": {"type": "string", "enum" : ["no","dsp","webrtc","silero"] },
 			"stream_dir": {"type": "string", "enum" : ["user_only","bot_only","duplex"], "default" : "duplex" },
 			"log_vad_events": {"type": "boolean", "enum" : [true,false], "default": false },
 			"enable_pre_silence": {"type": "boolean", "enum" : [true,false], "default": false },
@@ -196,6 +198,13 @@ const char* StartStreamingSchema = R"(
 			"properties": {
 				"silence_threshold_ms" : {"type": "integer", "minimum": 200, "maximum": 2000, "default": 800, "description": "Threshold for silence detection"},
 				"vad_strength" : {"type": "integer", "enum" : [0,1,2,3], "default" : 0, "description": "0 = Normal, 1 = Low Bitrate, 2 = Aggressive, 3 = Very Aggressive" }
+				}
+			},
+			"silero_vad_params": {"type": "object",
+			"properties": {
+				"min_silence_ms" : {"type": "integer", "default": 100, "description": "Minimum silence duration in milliseconds"},
+				"min_speech_ms" : {"type": "integer", "default": 250, "description": "Minimum speech duration in milliseconds"},
+				"speech_threshold" : {"type": "number", "minimum": 0.4, "maximum": 0.9, "default": 0.5, "description": "Probability of speech"}
 				}
 			},
 			"streaming_useraudio": {"type": "boolean", "enum" : [true,false], "default": true },
