@@ -13,7 +13,6 @@ const char* ConfFileSchema = R"(
 	"cpa_server": {"type": "string", "default": "<<local_ip>>", "description": "Server for CPA"},
 	"request_queue": {"type": "string", "default": "<cluster_id>.iravoice.request", "description": "Request queue for the service"},
 	"hush_model_path": {"type": "string", "default": "", "description": "Path to the Hush Denoiser ONNX model"},
-	"silero_core_count": {"type": "integer", "default": 30, "description": "Number of cores for Silero VAD"},
 	"silero_model_path": {"type": "string", "default": "", "description": "Path to the Silero VAD ONNX model"},
 	"call_scheduler": {"type": "string", "enum": ["none","iracallscheduler"], "default": "none", "description": "Call scheduler type"},
 	"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"}
