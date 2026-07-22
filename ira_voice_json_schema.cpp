@@ -7,6 +7,7 @@ const char* ConfFileSchema = R"(
     "fs_event_log": {"type": "string", "enum": ["none","call_events","all_events"], "default": "none", "description": "Call event logging level, use only for development or testing"},
 	"dial_timeout": {"type": "integer", "default": 30, "description": "Timeout for dialing in seconds"},
 	"eventlog_days": {"type": "integer", "default": 7, "description": "Number of days to keep event logs"},
+	"cpu_threshold": {"type": "integer", "minimum": 0, "maximum": 100, "default": 85, "description": "CPU usage threshold for load shedding"},
 	"max_dial_ports": {"type": "integer", "default": 40, "description": "Maximum concurrent number of dial ports. <max(20 x cpu_count or value specified)>"},
 	"cpa_init_tone": {"type": "string", "default": "<tone_stream://%(200,0,500)>", "description": "Initial tone for CPA"},
 	"cpa_port": {"type": "string", "default": "8331", "description": "Port for CPA"},
