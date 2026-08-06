@@ -1,3 +1,5 @@
+#include "../iracpa/ira_cpa_constants.hpp"
+
 const char* SetCpaConfigSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
