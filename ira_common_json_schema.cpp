@@ -1,3 +1,8 @@
+#include <ira_utils.hpp>
+
+namespace ira
+{
+
 const char* BasicConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -45,3 +50,5 @@ const char* NatsConfFileSchema = R"(
 	},
 "required": ["nats_url", "nats_public_key", "nats_seed_key"]
 })";
+
+}
