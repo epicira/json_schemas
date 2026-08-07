@@ -3,7 +3,7 @@
 namespace sched
 {
 
-inline constexpr const char* ConfFileSchema = R"(
+inline constexpr const char* C_ConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -21,7 +21,7 @@ inline constexpr const char* ConfFileSchema = R"(
     "required": ["dialer_app", "working_hours"]
 })";
 
-inline constexpr const char* QueueCallSchema = R"(
+inline constexpr const char* C_QueueCallSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -49,7 +49,7 @@ inline constexpr const char* QueueCallSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* AddSipGatewaySchema = R"(
+inline constexpr const char* C_AddSipGatewaySchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -76,7 +76,7 @@ inline constexpr const char* AddSipGatewaySchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* GetSipGatewayListSchema = R"(
+inline constexpr const char* C_GetSipGatewayListSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -92,7 +92,7 @@ inline constexpr const char* GetSipGatewayListSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* ManageSipGatewaySchema = R"(
+inline constexpr const char* C_ManageSipGatewaySchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -112,7 +112,7 @@ inline constexpr const char* ManageSipGatewaySchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* AddCampaignSchema = R"(
+inline constexpr const char* C_AddCampaignSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -140,7 +140,7 @@ inline constexpr const char* AddCampaignSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* ManageCampaignSchema = R"(
+inline constexpr const char* C_ManageCampaignSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -161,7 +161,7 @@ inline constexpr const char* ManageCampaignSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* DeleteCampaignSchema = R"(
+inline constexpr const char* C_DeleteCampaignSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -178,7 +178,7 @@ inline constexpr const char* DeleteCampaignSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* InstanceActivationSchema = R"(
+inline constexpr const char* C_InstanceActivationSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -197,7 +197,7 @@ inline constexpr const char* InstanceActivationSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* IraGetCampaignStatsSchema = R"(
+inline constexpr const char* C_IraGetCampaignStatsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -214,7 +214,7 @@ inline constexpr const char* IraGetCampaignStatsSchema = R"(
     "required": [ "event_name" ]
 })";
 
-inline constexpr const char* IraGetCampaignSizeSchema = R"(
+inline constexpr const char* C_IraGetCampaignSizeSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -231,7 +231,7 @@ inline constexpr const char* IraGetCampaignSizeSchema = R"(
     "required": [ "event_name" ]
 })";
 
-inline constexpr const char* IraSetCampaignParamsSchema = R"(
+inline constexpr const char* C_IraSetCampaignParamsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -253,7 +253,7 @@ inline constexpr const char* IraSetCampaignParamsSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* IraGetCampaignParamsSchema = R"(
+inline constexpr const char* C_IraGetCampaignParamsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -263,7 +263,7 @@ inline constexpr const char* IraGetCampaignParamsSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* IraRemoveCallsFromCampaignSchema = R"(
+inline constexpr const char* C_IraRemoveCallsFromCampaignSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -280,7 +280,7 @@ inline constexpr const char* IraRemoveCallsFromCampaignSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* IraDialPredictiveSchema = R"(
+inline constexpr const char* C_IraDialPredictiveSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -298,7 +298,7 @@ inline constexpr const char* IraDialPredictiveSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* IraDialProgressiveSchema = R"(
+inline constexpr const char* C_IraDialProgressiveSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",

@@ -1,6 +1,6 @@
 #pragma once
 
-inline constexpr const char* ConfFileSchema = R"(
+inline constexpr const char* C_ConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -25,7 +25,7 @@ inline constexpr const char* ConfFileSchema = R"(
 namespace iravoice
 {
 
-inline constexpr const char* WebSocketEventSchema = R"(
+inline constexpr const char* C_WebSocketEventSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -39,7 +39,7 @@ inline constexpr const char* WebSocketEventSchema = R"(
     "additionalProperties": true
 })";
 
-inline constexpr const char* MakeCallSchema = R"(
+inline constexpr const char* C_MakeCallSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -65,7 +65,7 @@ inline constexpr const char* MakeCallSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* BridgeCallsSchema = R"(
+inline constexpr const char* C_BridgeCallsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -82,7 +82,7 @@ inline constexpr const char* BridgeCallsSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* SimpleCallActionSchema = R"(
+inline constexpr const char* C_SimpleCallActionSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -98,7 +98,7 @@ inline constexpr const char* SimpleCallActionSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* RecordActionSchema = R"(
+inline constexpr const char* C_RecordActionSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -117,7 +117,7 @@ inline constexpr const char* RecordActionSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* RecordSiprecSchema = R"(
+inline constexpr const char* C_RecordSiprecSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -136,7 +136,7 @@ inline constexpr const char* RecordSiprecSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* StopRecordActionSchema = R"(
+inline constexpr const char* C_StopRecordActionSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -153,7 +153,7 @@ inline constexpr const char* StopRecordActionSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* SetChannelVarsActionSchema = R"(
+inline constexpr const char* C_SetChannelVarsActionSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -170,7 +170,7 @@ inline constexpr const char* SetChannelVarsActionSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* StartStreamingSchema = R"(
+inline constexpr const char* C_StartStreamingSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -229,7 +229,7 @@ inline constexpr const char* StartStreamingSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* TransferCallSchema = R"(
+inline constexpr const char* C_TransferCallSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -247,7 +247,7 @@ inline constexpr const char* TransferCallSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* PlayUrlSchema = R"(
+inline constexpr const char* C_PlayUrlSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -264,7 +264,7 @@ inline constexpr const char* PlayUrlSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* PlayFileSchema = R"(
+inline constexpr const char* C_PlayFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -281,7 +281,7 @@ inline constexpr const char* PlayFileSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* SnoopOnCallSchema = R"(
+inline constexpr const char* C_SnoopOnCallSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -299,7 +299,7 @@ inline constexpr const char* SnoopOnCallSchema = R"(
 })";
 
 
-inline constexpr const char* SelectSIPFieldsSchema = R"(
+inline constexpr const char* C_SelectSipFieldsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -329,7 +329,7 @@ inline constexpr const char* SelectSIPFieldsSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* DeleteSIPFieldsSchema = R"(
+inline constexpr const char* C_DeleteSipFieldsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -358,7 +358,7 @@ inline constexpr const char* DeleteSIPFieldsSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* InstanceActivationSchema = R"(
+inline constexpr const char* C_InstanceActivationSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -374,7 +374,7 @@ inline constexpr const char* InstanceActivationSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* SendDTMFSchema = R"(
+inline constexpr const char* C_SendDtmfSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -395,7 +395,7 @@ inline constexpr const char* SendDTMFSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* FSReloadXmlSchema = R"(
+inline constexpr const char* C_FsReloadXmlSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",

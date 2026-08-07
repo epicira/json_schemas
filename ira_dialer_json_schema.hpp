@@ -1,6 +1,6 @@
 #pragma once
 
-inline constexpr const char* ConfFileSchema = R"(
+inline constexpr const char* C_ConfFileSchema = R"(
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
@@ -42,7 +42,7 @@ inline constexpr const char* ConfFileSchema = R"(
 
 namespace dialer
 {
-inline constexpr const char* IraDialerMakeCallSchema = R"(
+inline constexpr const char* C_IraDialerMakeCallSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -74,7 +74,7 @@ inline constexpr const char* IraDialerMakeCallSchema = R"(
 })";
 
 
-inline constexpr const char* IraDialerBridgeCallSchema = R"(
+inline constexpr const char* C_IraDialerBridgeCallSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -96,7 +96,7 @@ inline constexpr const char* IraDialerBridgeCallSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* IraDialerSimpleCallActionSchema = R"(
+inline constexpr const char* C_IraDialerSimpleCallActionSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -142,7 +142,7 @@ inline constexpr const char* IraDialerSimpleCallActionSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* IraDialerPlayTTSSchema = R"(
+inline constexpr const char* C_IraDialerPlayTtsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -167,7 +167,7 @@ inline constexpr const char* IraDialerPlayTTSSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* IraDialerPlayUrlSchema = R"(
+inline constexpr const char* C_IraDialerPlayUrlSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -191,7 +191,7 @@ inline constexpr const char* IraDialerPlayUrlSchema = R"(
 })";
 
 
-inline constexpr const char* IraDialerPlayFileSchema = R"(
+inline constexpr const char* C_IraDialerPlayFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -214,7 +214,7 @@ inline constexpr const char* IraDialerPlayFileSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* IraDialerGetValidDTMFSchema = R"(
+inline constexpr const char* C_IraDialerGetValidDtmfSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -247,7 +247,7 @@ inline constexpr const char* IraDialerGetValidDTMFSchema = R"(
 })";
 
 
-inline constexpr const char* IraDialerGetSimpleDTMFSchema = R"(
+inline constexpr const char* C_IraDialerGetSimpleDtmfSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -272,7 +272,7 @@ inline constexpr const char* IraDialerGetSimpleDTMFSchema = R"(
 })";
 
 
-inline constexpr const char* IraDialerCreateGatewaySchema = R"(
+inline constexpr const char* C_IraDialerCreateGatewaySchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -293,7 +293,7 @@ inline constexpr const char* IraDialerCreateGatewaySchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* IraDialerSendDTMFSchema = R"(
+inline constexpr const char* C_IraDialerSendDtmfSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -314,7 +314,7 @@ inline constexpr const char* IraDialerSendDTMFSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* IraDialerDirectBridgeSchema = R"(
+inline constexpr const char* C_IraDialerDirectBridgeSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -337,7 +337,7 @@ inline constexpr const char* IraDialerDirectBridgeSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* AddSipGatewayDefSchema = R"(
+inline constexpr const char* C_AddSipGatewayDefSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -360,7 +360,7 @@ inline constexpr const char* AddSipGatewayDefSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* DeleteSipGatewaySchema = R"(
+inline constexpr const char* C_DeleteSipGatewaySchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -380,7 +380,7 @@ inline constexpr const char* DeleteSipGatewaySchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* InstanceActivationSchema = R"(
+inline constexpr const char* C_InstanceActivationSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -400,7 +400,7 @@ inline constexpr const char* InstanceActivationSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* HangupEventConfirmationSchema = R"(
+inline constexpr const char* C_HangupEventConfirmationSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",

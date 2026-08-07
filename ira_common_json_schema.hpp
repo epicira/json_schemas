@@ -3,7 +3,7 @@
 namespace ira
 {
 
-inline constexpr const char* BasicConfFileSchema = R"(
+inline constexpr const char* C_BasicConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -37,7 +37,7 @@ inline constexpr const char* BasicConfFileSchema = R"(
 	"required": [ "cluster_id"]
 })";
 
-inline constexpr const char* NatsConfFileSchema = R"(
+inline constexpr const char* C_NatsConfFileSchema = R"(
 {
 "$schema": "http://json-schema.org/draft-07/schema#",
 "type": "object",
