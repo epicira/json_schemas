@@ -1,6 +1,6 @@
 #pragma once
 
-inline constexpr const char* ConfFileSchema = R"(
+inline constexpr const char* C_ConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
