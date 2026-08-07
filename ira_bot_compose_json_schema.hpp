@@ -1,4 +1,6 @@
-const char* ConfFileSchema = R"(
+#pragma once
+
+inline constexpr const char* ConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -16,7 +18,7 @@ const char* ConfFileSchema = R"(
     "required": ["wss_certificate_file","wss_private_key_file","wss_dh_params_file"]
 })";
 
-const char* IraRequestSchema = R"(
+inline constexpr const char* IraRequestSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",

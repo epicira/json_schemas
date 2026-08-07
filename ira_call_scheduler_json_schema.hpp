@@ -1,30 +1,32 @@
+#pragma once
 
-namespace router
+namespace sched
 {
 
-const char* ConfFileSchema = R"(
+inline constexpr const char* ConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
       "dialer_app": {"type": "string", "minLength": 2},
       "enable": {"type": "boolean", "enum" : [true,false] },
+      "strict_limits": {"type": "boolean", "enum" : [true,false] },
       "short_delay": {"type": "integer", "minimum": 2},
       "long_delay": {"type": "integer", "minimum": 2},
-      "max_total_queue_size": {"type": "integer", "minimum": 100},
+      "max_number_buffer_size": {"type": "integer", "minimum": 100, "maximum": 10000},
       "cps_percent": {"type": "number", "maximum": 1.0},
       "dial_timeout": {"type": "integer", "minimum": 5, "maximum": 60},
-      "working_hours": {"type": "string", "minLength": 5}
+      "working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"}
     },
     "required": ["dialer_app", "working_hours"]
 })";
 
-const char* MakeCallSchema = R"(
+inline constexpr const char* QueueCallSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
 	"properties": {
-		"event_name": {"type": "string", "enum": ["request_make_call"] },
+		"event_name": {"type": "string", "enum": ["request_queue_call","request_make_call_now"] },
 		"event_data": {"type": "object",
 		"properties" : {
 			"campaign": {"type": "string", "minLength": 2, "maxLength": 60},
@@ -47,7 +49,7 @@ const char* MakeCallSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* AddSipGatewaySchema = R"(
+inline constexpr const char* AddSipGatewaySchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -74,7 +76,7 @@ const char* AddSipGatewaySchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* GetSipGatewayListSchema = R"(
+inline constexpr const char* GetSipGatewayListSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -90,7 +92,7 @@ const char* GetSipGatewayListSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* ManageSipGatewaySchema = R"(
+inline constexpr const char* ManageSipGatewaySchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -110,16 +112,19 @@ const char* ManageSipGatewaySchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* AddCampaignSchema = R"(
+inline constexpr const char* AddCampaignSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
 	"properties": {
-		"event_name": {"type": "string", "enum": ["request_add_campaign_name"] },
+		"event_name": {"type": "string", "enum": ["request_add_campaign"] },
 		"event_data": {"type": "object",
 		"properties": { 
 			"name": {"type": "string", "minLength": 2, "maxLength": 55},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
 			"active": {"type": "boolean", "enum" : [true,false] },
+			"campaign_type": {"type": "string", "enum" : ["bot","pred","prog","preview"] },
+			"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"},
 			"max_limit": {"type": "integer" }, 
 			"gateways": { "type": "array",
 			"items": [{"type": "object",
@@ -129,47 +134,51 @@ const char* AddCampaignSchema = R"(
 							"required": ["name"]}
 							]}
 		},
-		"required": ["name","max_limit","gateways"]
+		"required": ["name","tenant_id","campaign_type","max_limit","gateways"]
 		}
 	},
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* ManageCampaignSchema = R"(
+inline constexpr const char* ManageCampaignSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
 	"properties": {
-		"event_name": {"type": "string", "enum": ["request_manage_campaign_name"] },
+		"event_name": {"type": "string", "enum": ["request_manage_campaign"] },
 		"event_data": {"type": "object",
 		"properties": {
 			"name": {"type": "string", "minLength": 2, "maxLength": 55},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
 			"active": {"type": "boolean", "enum" : [true,false] },
+			"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"},
 			"max_limit": {"type": "integer" } 
 		},
-		"required": [ "name"]
+		"oneOf": [{"required": ["active"]},{"required": ["max_limit"]},{"required": ["working_hours"]}],
+		"required": [ "name","tenant_id"]
 		}
 	},
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* DeleteCampaignSchema = R"(
+inline constexpr const char* DeleteCampaignSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
 	"properties": {
-		"event_name": {"type": "string", "enum": ["request_delete_campaign_name"] },
+		"event_name": {"type": "string", "enum": ["request_delete_campaign"] },
 		"event_data": {"type": "object",
 		"properties": {
-		"name": {"type": "string", "minLength": 2, "maxLength": 55}
+			"name": {"type": "string", "minLength": 2, "maxLength": 55},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20}
 		},
-		"required": [ "name"]
+		"required": [ "name","tenant_id"]
 		}
 	},
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* InstanceActivationSchema = R"(
+inline constexpr const char* InstanceActivationSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
@@ -188,72 +197,120 @@ const char* InstanceActivationSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
-const char* IraGetQueueSizeSchema = R"(
+inline constexpr const char* IraGetCampaignStatsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["get_queue_size"] }
-    },
+      "event_name": {"type": "string", "enum": ["get_campaign_stats"] },
+		"event_data": {"type": "object",
+		"properties": {
+			"campaign": {"type": "string"},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20}
+			},
+			"required": ["campaign","tenant_id"]		
+		}
+	},
     "required": [ "event_name" ]
 })";
 
-const char* IraSetQueueParamsSchema = R"(
+inline constexpr const char* IraGetCampaignSizeSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["set_queue_params"] },
+      "event_name": {"type": "string", "enum": ["get_campaign_size"] },
+		"event_data": {"type": "object",
+		"properties": {
+			"campaign": {"type": "string"},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20}
+			},
+			"required": [ "campaign","tenant_id"]		
+		}
+	},
+    "required": [ "event_name" ]
+})";
+
+inline constexpr const char* IraSetCampaignParamsSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "enum": ["set_campaign_params"] },
 		"event_data": {"type": "object",
 			"properties": {
-				"max_total_queue_size": {"type": "integer", "minimum": 1, "maximum": 200000},
+				"max_number_buffer_size": {"type": "integer", "minimum": 100, "maximum": 10000},
 				"short_delay": {"type": "integer", "minimum": 5, "maximum": 10},
 				"long_delay": {"type": "integer", "minimum": 20, "maximum": 100},
 				"cps_percent": {"type": "number", "minimum": 0.1, "maximum": 1.0},
 				"enable_firing_calls": {"type": "boolean", "enum" : [true,false] },
+				"strict_limits": {"type": "boolean", "enum" : [true,false] },
 				"dial_timeout": {"type": "integer", "minimum": 10, "maximum": 100},
-				"working_hours": {"type": "string", "pattern": "^(?:[01]\\d|2[0-3])[0-5]\\d-(?:[01]\\d|2[0-3])[0-5]\\d$"}
+				"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"}
 			}
 		}
     },
     "required": [ "event_name", "event_data"]
 })";
 
-const char* IraGetGatewayQueueSizeSchema = R"(
+inline constexpr const char* IraGetCampaignParamsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["get_gateway_queue_size"] },
+      "event_name": {"type": "string", "enum": ["get_campaign_params"] }
+    },
+    "required": [ "event_name", "event_data"]
+})";
+
+inline constexpr const char* IraRemoveCallsFromCampaignSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "enum": ["remove_calls_from_campaign"] },
 		"event_data": {"type": "object",
 			"properties": {
-				"campaign": {"type": "string", "minLength": 1 }
-			}
+				"campaign": {"type": "string", "minLength": 1 },
+				"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20}
+			},
+			"required": ["campaign","tenant_id"]		
 		}
     },
     "required": [ "event_name", "event_data"]
 })";
 
-const char* IraGetQueueParamsSchema = R"(
+inline constexpr const char* IraDialPredictiveSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["get_queue_params"] }
+      "event_name": {"type": "string", "enum": ["request_predictive_dial"] },
+		"event_data": {"type": "object",
+			"properties": {
+				"campaign": {"type": "string", "minLength": 1 },
+				"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
+				"dial_schedule": { "type": "array","items": [{"type": "integer"}]}
+			},
+			"required": ["campaign","tenant_id", "dial_schedule"]		
+		}
     },
     "required": [ "event_name", "event_data"]
 })";
 
-const char* IraRemoveCallsFromQueueSchema = R"(
+inline constexpr const char* IraDialProgressiveSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-      "event_name": {"type": "string", "enum": ["remove_calls_from_queue"] },
+      "event_name": {"type": "string", "enum": ["request_progressive_dial"] },
 		"event_data": {"type": "object",
 			"properties": {
-				"campaign": {"type": "string", "minLength": 1 }
-			}
+				"campaign": {"type": "string", "minLength": 1 },
+				"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
+				"dial_count": {"type": "integer", "minimum": 1}
+			},
+			"required": ["campaign","tenant_id", "dial_count"]		
 		}
     },
     "required": [ "event_name", "event_data"]

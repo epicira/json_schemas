@@ -1,4 +1,6 @@
-const char* GSetConfigSchema = R"(
+#pragma once
+
+inline constexpr const char* GSetConfigSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 		"type" : "object",
@@ -22,7 +24,7 @@ const char* GSetConfigSchema = R"(
 	"required": ["event_name", "event_data"]
 })";
 
-const char* GPredictSchema = R"(
+inline constexpr const char* GPredictSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 		"type" : "object",

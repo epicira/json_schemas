@@ -1,9 +1,9 @@
-#include <ira_utils.hpp>
+#pragma once
 
 namespace ira
 {
 
-const char* BasicConfFileSchema = R"(
+inline constexpr const char* BasicConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -37,7 +37,7 @@ const char* BasicConfFileSchema = R"(
 	"required": [ "cluster_id"]
 })";
 
-const char* NatsConfFileSchema = R"(
+inline constexpr const char* NatsConfFileSchema = R"(
 {
 "$schema": "http://json-schema.org/draft-07/schema#",
 "type": "object",

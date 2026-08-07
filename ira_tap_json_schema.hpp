@@ -1,5 +1,6 @@
+#pragma once
 
-const char* ConfFileSchema = R"(
+inline constexpr const char* ConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -46,7 +47,7 @@ const char* ConfFileSchema = R"(
     "required": [ "tenant_id", "profiles"]
 })";
 
-const char* UpdateTapperDetailsSchema = R"(
+inline constexpr const char* UpdateTapperDetailsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",

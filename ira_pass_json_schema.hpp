@@ -1,4 +1,6 @@
-const char* IraPassSchema = R"(
+#pragma once
+
+inline constexpr const char* IraPassSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",

@@ -1,6 +1,6 @@
-#include "../iracpa/ira_cpa_constants.hpp"
+#pragma once
 
-const char* SetCpaConfigSchema = R"(
+inline constexpr const char* SetCpaConfigSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -34,7 +34,7 @@ const char* SetCpaConfigSchema = R"(
     "required": [ "config_name", "tenant_id", "analysis"]
 })";
 
-const char* SelectConfigSchema = R"(
+inline constexpr const char* SelectConfigSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -49,7 +49,7 @@ const char* SelectConfigSchema = R"(
     "required": [ "config_name", "tenant_id"]
 })";
 
-const char* DeleteCpaConfigSchema = R"(
+inline constexpr const char* DeleteCpaConfigSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -60,7 +60,7 @@ const char* DeleteCpaConfigSchema = R"(
   "required": [ "config_name", "tenant_id" ]
 })";
 
-const char* IraRequestSchema = R"(
+inline constexpr const char* IraRequestSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -71,7 +71,7 @@ const char* IraRequestSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
-const char* ConfFileSchema = R"(
+inline constexpr const char* ConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -129,7 +129,7 @@ const char* ConfFileSchema = R"(
     "required": ["use_self_signed_certificate"]
 })";
 
-const char* TesterConfFileSchema = R"(
+inline constexpr const char* TesterConfFileSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -176,7 +176,7 @@ const char* TesterConfFileSchema = R"(
     "required": ["test_file_dir"]
 })";
 
-const char* StartLoadTestSchema = R"(
+inline constexpr const char* StartLoadTestSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -191,7 +191,7 @@ const char* StartLoadTestSchema = R"(
   "required": [ "tenant_id", "config_name","simul_req","test_duration"]
 })";
 
-const char* StartRegressionTestSchema = R"(
+inline constexpr const char* StartRegressionTestSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
