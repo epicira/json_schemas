@@ -224,7 +224,7 @@ inline constexpr const char *C_DeleteAgentQueueMapSchema = R"({
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char *C_AddTaskSchema = R"({
+inline constexpr const char *C_AddCallSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
@@ -234,10 +234,10 @@ inline constexpr const char *C_AddTaskSchema = R"({
             "properties": {
                 "tenant_id": {"type": "string"},
                 "queue_id": {"type": "string"},
-                "task_id": {"type": "string"}
+                "call_uuid": {"type": "string"}
             },
             "additionalProperties": false,
-            "required": ["tenant_id", "queue_id", "task_id"]
+            "required": ["tenant_id", "queue_id", "call_uuid"]
         }
     },
     "additionalProperties": false",
@@ -254,7 +254,8 @@ inline constexpr const char *C_AgentEventSchema = R"({
             "properties": {
                 "tenant_id": {"type": "string"},
                 "agent_id": {"type": "string"},
-                "event": {"type": "integer"}
+                "event": {"type": "integer"},
+                "state": {"type": "string"}
             },
             "additionalProperties": false"
             "required": ["tenant_id", "agent_id", "event"]
