@@ -49,6 +49,42 @@ inline constexpr const char* C_QueueCallSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
+inline constexpr const char* C_CreateNumberMaskSessionSchema = R"(
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"event_name": {"type": "string", "enum": ["request_create_number_mask_session"] },
+		"event_data": {"type": "object",
+		"properties" : {
+			"campaign": {"type": "string", "minLength": 2, "maxLength": 60},
+			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
+			"participants": { "type": "array","items": {"type": "string", "minLength": 2, "maxLength": 25}, "minItems": 2, "maxItems": 2},
+			"session_expiry_seconds": {"type": "integer", "default": 3600}
+		},
+		"required": ["campaign", "tenant_id", "participants", "session_expiry_seconds"] 
+		}
+	},
+	"required": [ "event_name", "event_data"]
+})";
+
+inline constexpr const char* C_DeleteNumberMaskSessionSchema = R"(
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"event_name": {"type": "string", "enum": ["request_delete_number_mask_session"] },
+		"event_data": {"type": "object",
+		"properties" : {
+			"mask_number": {"type": "string", "minLength": 3, "maxLength": 25},
+			"any_one_participant": {"type": "string", "minLength": 3, "maxLength": 25}
+		},
+		"required": ["mask_number","any_one_participant"] 
+		}
+	},
+	"required": [ "event_name", "event_data"]
+})";
+
 inline constexpr const char* C_AddSipGatewaySchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
@@ -66,9 +102,10 @@ inline constexpr const char* C_AddSipGatewaySchema = R"(
 			"variables": {"type": "object"},
 			"disable_after": {"type": "integer", "minimum": 0},
 			"hop_count": {"type": "integer"},
-			"dialer_ip_list": { "type": "array","items": [{"type": "string"}]},
+			"dialer_ip_list": { "type": "array","items": {"type": "string"}},
 			"did_prefix": {"type": "string", "minLength": 2, "maxLength": 15},
-			"did_range": { "type": "array","items": [{"type": "string", "pattern": "^[0-9]{3,10}-[0-9]{3,10}$"}]}
+			"did_range": { "type": "array", "minItems": 1, "uniqueItems": true,
+							"items": {"type": "string","pattern": "^[0-9]{3,10}-[0-9]{3,10}$"}}
 		},
 		"required": [ "name", "params", "capacity", "cps", "enable","dialer_ip_list" ]
 		}
@@ -129,7 +166,8 @@ inline constexpr const char* C_AddCampaignSchema = R"(
 			"gateways": { "type": "array",
 			"items": [{"type": "object",
 			"properties": { "name": {"type": "string" },
-							"did_range": { "type": "array","items": [{"type": "string", "pattern": "^[0-9]{3,10}-[0-9]{3,10}$"}]}
+							"did_range": { "type": "array", "minItems": 1, "uniqueItems": true,
+									"items": {"type": "string","pattern": "^[0-9]{3,10}-[0-9]{3,10}$"}}
 							},
 							"required": ["name"]}
 							]}
@@ -290,7 +328,7 @@ inline constexpr const char* C_IraDialPredictiveSchema = R"(
 			"properties": {
 				"campaign": {"type": "string", "minLength": 1 },
 				"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
-				"dial_schedule": { "type": "array","items": [{"type": "integer"}]}
+				"dial_schedule": { "type": "array","items": {"type": "integer"}}
 			},
 			"required": ["campaign","tenant_id", "dial_schedule"]		
 		}
