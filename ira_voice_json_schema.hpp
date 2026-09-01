@@ -17,6 +17,7 @@ inline constexpr const char* C_ConfFileSchema = R"(
 	"hush_model_path": {"type": "string", "default": "", "description": "Path to the Hush Denoiser ONNX model"},
 	"silero_model_path": {"type": "string", "default": "", "description": "Path to the Silero VAD ONNX model"},
 	"call_scheduler": {"type": "string", "enum": ["none","iracallscheduler"], "default": "none", "description": "Call scheduler type"},
+	"pause_threshold" : {"type": "integer", "minimum": 100, "maximum": 500, "default": 200, "description": "Threshold for pause detection"},
 	"botaudio_buffer_size": {"type": "integer", "minLength": 10, "maxLength": 120, "default": 20, "description": "Buffer size for botaudio in seconds"}
 	},
 	"required": [ ]
