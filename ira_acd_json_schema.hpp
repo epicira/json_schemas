@@ -26,16 +26,16 @@ inline constexpr const char *C_AgentEventSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "event_name": {"type": "string"},
+        "event_name": {"type": "string", "enum": ["acd::agent_event"]},
         "event_data": {
             "type": "object",
             "properties": {
                 "tenant_id": {"type": "string"},
                 "agent_id": {"type": "string"},
                 "event": {"type": "integer"},
-                "state": {"type": "string"}
+                "state": {"type": "integer"}
             },
-            "additionalProperties": false
+            "additionalProperties": false,
             "required": ["tenant_id", "agent_id", "event"]
         }
     },
