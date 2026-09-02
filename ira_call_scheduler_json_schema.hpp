@@ -60,20 +60,20 @@ inline constexpr const char* C_CreateNumberMaskSessionSchema = R"(
 			"campaign": {"type": "string", "minLength": 2, "maxLength": 60},
 			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
 			"participants": { "type": "array","items": {"type": "string", "minLength": 2, "maxLength": 25}, "minItems": 2, "maxItems": 2},
-			"session_expiry_seconds": {"type": "integer", "default": 3600}
+			"session_expiry_seconds": {"type": "integer", "minimum": 5, "default": 3600}
 		},
-		"required": ["campaign", "tenant_id", "participants", "session_expiry_seconds"] 
+		"required": ["campaign", "tenant_id", "participants"] 
 		}
 	},
 	"required": [ "event_name", "event_data"]
 })";
 
-inline constexpr const char* C_DeleteNumberMaskSessionSchema = R"(
+inline constexpr const char* C_NumberMaskSessionSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"type": "object",
 	"properties": {
-		"event_name": {"type": "string", "enum": ["request_delete_number_mask_session"] },
+		"event_name": {"type": "string", "enum": ["request_delete_number_mask_session","request_lookup_number_mask_session"] },
 		"event_data": {"type": "object",
 		"properties" : {
 			"mask_number": {"type": "string", "minLength": 3, "maxLength": 25},
@@ -160,7 +160,7 @@ inline constexpr const char* C_AddCampaignSchema = R"(
 			"name": {"type": "string", "minLength": 2, "maxLength": 55},
 			"tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
 			"active": {"type": "boolean", "enum" : [true,false] },
-			"campaign_type": {"type": "string", "enum" : ["bot","pred","prog","preview"] },
+			"campaign_type": {"type": "string", "enum" : ["bot","pred","prog","preview","masked"] },
 			"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"},
 			"max_limit": {"type": "integer" }, 
 			"gateways": { "type": "array",
