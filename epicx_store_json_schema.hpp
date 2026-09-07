@@ -356,6 +356,18 @@ inline constexpr const char* C_GetAgentStatesSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
+inline constexpr const char* C_AddAudioDataSchema = R"(
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "tenant_id": {"type": "string"},
+        "queue_id": {"type": "string"},
+        "name": {"type": "string"},
+        "kind": {"type": "string"}
+    },
+    "required": ["tenant_id", "queue_id", "name", "kind"]
+)";
+
 inline constexpr const char *C_ConfigFileSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
