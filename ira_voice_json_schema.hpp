@@ -66,6 +66,30 @@ inline constexpr const char* C_MakeCallSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
+inline constexpr const char* C_MakeExtensionCallSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "event_name": {"type": "string", "enum": ["request_make_extension_call"] },
+      "event_data": {"type": "object",
+			"properties": {
+			  "call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+			  "extension": {"type": "string", "minLength": 2, "maxLength": 60},
+			  "campaign": {"type": "string", "minLength": 2, "maxLength": 60},
+			  "tenant_id": {"type": "string" , "minLength": 2, "maxLength": 20},
+			  "from_number": {"type": "string", "maxLength": 25},
+			  "event_subject": {"type": "string", "minLength": 2, "maxLength": 50},
+			  "dial_timeout": {"type": "integer", "minimum": 5, "default": 10},
+			  "channel_vars": {"type": "object"},
+			  "call_params": {"type": "object"}
+			},
+			"required": [ "call_uuid", "extension", "tenant_id","event_subject" ]
+		}
+    },
+    "required": [ "event_name", "event_data"]
+})";
+
 inline constexpr const char* C_BridgeCallsSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -109,8 +133,9 @@ inline constexpr const char* C_RecordActionSchema = R"(
 		"properties": {
 			"call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
 			"file_name": {"type": "string"},
-			"mp3_quality": {"type": "integer", "minimum": 0, "maximum": 9},
-			"format": {"type": "string", "enum" : ["mp3","wav"] }
+			"mp3_quality": {"type": "integer", "minimum": 0, "maximum": 9, "default": 5},
+			"flac_level": {"type": "integer", "minimum": 0, "maximum": 8, "default": 5},
+			"format": {"type": "string", "enum" : ["mp3","wav","flac"] }
 		},
 		"required": [ "call_uuid" ]
 		}
@@ -128,8 +153,9 @@ inline constexpr const char* C_RecordSiprecSchema = R"(
 		"properties": {
 			"siprec_id": {"type": "string"},
 			"file_name": {"type": "string"},
-			"mp3_quality": {"type": "integer", "minimum": 0, "maximum": 9},
-			"format": {"type": "string", "enum" : ["mp3","wav"] }
+			"mp3_quality": {"type": "integer", "minimum": 0, "maximum": 9, "default": 5},
+			"flac_level": {"type": "integer", "minimum": 0, "maximum": 8, "default": 5},
+			"format": {"type": "string", "enum" : ["mp3","wav","flac"] }
 		},
 		"required": [ "siprec_id","file_name" ]
 		}

@@ -37,8 +37,9 @@ inline constexpr const char* C_ConfFileSchema = R"(
 			"speech_threshold" : {"type": "number", "minimum": 0.4, "maximum": 0.9, "default": 0.5, "description": "Probability of speech"}
 			}
 		},
-		"record": {"type": "string", "enum" : ["none","mp3","wav"] },
 		"mp3_quality": {"type": "integer", "minimum": 0, "maximum": 9},
+		"flac_level": {"type": "integer", "minimum": 0, "maximum": 8, "default": 5},
+		"record": {"type": "string", "enum" : ["none","mp3","wav","flac"] },
 		"induce_error": {"type": "boolean", "enum" : [true,false] },
 		"bot_audio_mode": {"type": "string", "enum" : ["stream","blocks"] },
 		"bot_response_mode": {"type": "string", "enum" : ["periodic","sequence"] },
