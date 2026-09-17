@@ -107,6 +107,44 @@ inline constexpr const char* C_BridgeCallsSchema = R"(
     "required": [ "event_name", "event_data"]
 })";
 
+inline constexpr const char* C_IraConfActionSchema = R"(
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"event_name": {"type": "string", "enum": ["request_mute_confcall","request_unmute_confcall","request_deaf_confcall","request_undeaf_confcall","request_park_confcall"] },
+		"event_data": {"type": "object",
+		"properties": {
+				  "call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
+				},
+			  "required": [ "call_uuid" ]
+			}
+		},
+    "required": [ "event_name", "event_data"]
+})";
+
+inline constexpr const char* C_IraAddToConfSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": 
+    {
+        "event_name": {"type": "string", "enum": ["request_add_to_conf"]},
+        "event_data": 
+        {
+            "type": "object",
+            "properties": 
+            {
+                "call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+                "conf_uuid": {"type": "string", "pattern": "^CONF-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+                "event_subject": {"type": "string"}
+            },
+            "required": ["call_uuid", "conf_uuid"]
+        }
+    },
+    "required": ["event_name", "event_data"]
+})";
+
 inline constexpr const char* C_SimpleCallActionSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
