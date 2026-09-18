@@ -73,4 +73,6 @@ namespace iraerror
     inline constexpr std::pair<int, const char* const> C_UnableToReserveMaskedNumber = {163, "Unable to reserve a masked number"};
     inline constexpr std::pair<int, const char* const> C_NoSuchMaskedNumberIsReserved = {164, "No such masked number is reserved"};
     inline constexpr std::pair<int, const char* const> C_UnableToDeleteMaskedNumberReservation = {165, "Unable to delete a masked number reservation"};
+    inline constexpr std::pair<int, const char* const> C_NoSuchMaskedNumberSessionAlive = { 166, "No such masked number session is alive" };
+    inline constexpr std::pair<int, const char* const> C_ParticipantDoesntExistInSession = {167, "Participant doesn't exist in session"};
 } // namespace iraerror

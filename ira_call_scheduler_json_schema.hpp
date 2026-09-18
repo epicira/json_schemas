@@ -85,6 +85,40 @@ inline constexpr const char* C_NumberMaskSessionSchema = R"(
 	"required": [ "event_name", "event_data"]
 })";
 
+inline constexpr const char* C_UpdateNumberMaskParticipantSchema = R"(
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"event_name": {"type": "string", "enum": ["request_update_number_mask_participant"] },
+		"event_data": {"type": "object",
+		"properties" : {
+			"session_id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+			"call_uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+			"participant": {"type": "string", "minLength": 3, "maxLength": 25}
+		},
+		"required": ["session_id","call_uuid","participant"] 
+		}
+	},
+	"required": [ "event_name", "event_data"]
+})";
+
+inline constexpr const char* C_QueryNumberMaskCallsSchema = R"(
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"event_name": {"type": "string", "enum": ["request_query_number_mask_calls"] },
+		"event_data": {"type": "object",
+		"properties" : {
+			"session_id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
+		},
+		"required": ["session_id"] 
+		}
+	},
+	"required": [ "event_name", "event_data"]
+})";
+
 inline constexpr const char* C_AddSipGatewaySchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",

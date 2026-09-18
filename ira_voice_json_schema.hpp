@@ -145,6 +145,21 @@ inline constexpr const char* C_IraAddToConfSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
+inline constexpr const char* C_IraCheckConfExistsSchema = R"(
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"event_name": {"type": "string", "enum": ["request_check_conf_exists"] },
+		"event_data": {"type": "object",
+		"properties": {"conf_uuid": {"type": "string", "pattern": "^CONF-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
+				},
+				"required": [ "conf_uuid" ]
+			}
+		},
+    "required": [ "event_name", "event_data"]
+})";
+
 inline constexpr const char* C_SimpleCallActionSchema = R"(
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
