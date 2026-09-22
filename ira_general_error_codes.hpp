@@ -54,7 +54,7 @@ namespace iraerror
     inline constexpr std::pair<int, const char* const> C_StreamAlreadyInitiatedForCall = {144, "Stream already initiated for the call"};
     inline constexpr std::pair<int, const char* const> C_ErrorInRecording = {145, "Error in recording"};
     inline constexpr std::pair<int, const char* const> C_NoActiveDialerInstanceAvailable = {146, "No active Dialer instance available"};
-    inline constexpr std::pair<int, const char* const> C_NoInactiveDialerInstanceAvailable = {147, "No inactive Dialer instance available"};
+    inline constexpr std::pair<int, const char* const> C_DialerInstanceIsInactive = {147, "Dialer instance is inactive"};
     inline constexpr std::pair<int, const char* const> C_ErrorRetrievingCallStatistics = {148, "Error retrieving call statistics from Dialer instances"};
     inline constexpr std::pair<int, const char* const> C_ErrorInTransferringCalls = {149, "Error in transferring calls"};
     inline constexpr std::pair<int, const char* const> C_InboundCallReachedInactiveInstance = {150, "Inbound call reached an inactive instance"};
