@@ -356,18 +356,6 @@ inline constexpr const char* C_GetAgentStatesSchema = R"(
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* C_AddAudioDataSchema = R"(
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-        "tenant_id": {"type": "string"},
-        "queue_id": {"type": "string"},
-        "name": {"type": "string"},
-        "kind": {"type": "string"}
-    },
-    "required": ["tenant_id", "queue_id", "name", "kind"]
-)";
-
 inline constexpr const char *C_ConfigFileSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
@@ -377,4 +365,36 @@ inline constexpr const char *C_ConfigFileSchema = R"({
     },
     "required": ["pg_conn_str", "request_emit_subject"]
 })";
+
+inline constexpr const char* C_GetAgentAudioMetadataSchema = R"({
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_get_audio_metadata"]},
+        "event_data": {
+            "type": "object",
+            "properties": {
+                "tenant_id": {"type": "string"},
+                "queue_id": {"type": "string"}
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id", "queue_id"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"]
+})";
+
+inline constexpr const char* C_GetExtensionsSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_get_extensions"]},
+        "event_data": {"type": "string"}
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"]
+})";
 }
+
