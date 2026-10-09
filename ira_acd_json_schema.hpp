@@ -65,8 +65,8 @@ inline constexpr const char *C_ConfigFileSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "pg_conn_str": {"type": "string", "description": "PostgreSQL connection string"}
+        "file_store_base_url": {"type": "string", "description": "File Store URL where audio for the queue handling is stored"}
     },
-    "required": ["pg_conn_str"]
+    "required": ["file_store_base_url"]
 })";
 } // namespace IraACD
