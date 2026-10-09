@@ -60,7 +60,7 @@ inline constexpr const char* C_MakeCallSchema = R"(
 			  "channel_vars": {"type": "object"},
 			  "call_params": {"type": "object"}
 			},
-			"required": [ "call_uuid", "gateway", "to_number", "tenant_id","event_subject" ]
+			"required": [ "call_uuid", "gateway", "to_number", "tenant_id","event_subject","from_number" ]
 		}
     },
     "required": [ "event_name", "event_data"]
@@ -84,7 +84,7 @@ inline constexpr const char* C_MakeExtensionCallSchema = R"(
 			  "channel_vars": {"type": "object"},
 			  "call_params": {"type": "object"}
 			},
-			"required": [ "call_uuid", "extension", "tenant_id","event_subject" ]
+			"required": [ "call_uuid", "extension", "tenant_id","event_subject","from_number" ]
 		}
     },
     "required": [ "event_name", "event_data"]
