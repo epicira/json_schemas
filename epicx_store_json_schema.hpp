@@ -396,5 +396,135 @@ inline constexpr const char* C_GetExtensionsSchema = R"(
     "additionalProperties": false,
     "required": ["event_name", "event_data"]
 })";
+
+inline constexpr const char* C_AddWorkingHoursSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_add_working_hours"]},
+        "event_data": {
+            "type": "object"
+            "properties": {
+                "tenant_id": {"type": "string"},
+                "name": {"type": "string"},
+                "timezone": {"type": "string", "description": "IANA timezone identifier"},
+                "schedule": {
+                    "type": "object",
+                    "properties": {
+                        "sunday": { "$ref": "#/definitions/intervals" },
+                        "monday": { "$ref": "#/definitions/intervals" },
+                        "tuesday": { "$ref": "#/definitions/intervals" },
+                        "wednesday": { "$ref": "#/definitions/intervals" },
+                        "thursday": { "$ref": "#/definitions/intervals" },
+                        "friday": { "$ref": "#/definitions/intervals" },
+                        "saturday": { "$ref": "#/definitions/intervals" }
+                    },
+                    "additionalProperties": false,
+                    "required": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+                }
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id", "name", "timezone", "days"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"],
+    "definitions": {
+        "time": {
+            "type": string,
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "interval": {
+            "type": "object",
+            "properties": {
+                "start": {"$ref": "#/definitions/time"},
+                "end": {"$ref": "#/definitions/time"}
+            },
+            "additionalProperties": false,
+            "required": ["start", "end"]
+        },
+        "intervals": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/interval"}
+        }
+    }
+}
+)";
+
+inline constexpr const char* C_UpdateWorkingHoursSchema = R"(
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_update_working_hours"]},
+        "event_data": {
+            "type": "object"
+            "properties": {
+                "tenant_id": {"type": "string"},
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "timezone": {"type": "string", "description": "IANA timezone identifier"},
+                "schedule": {
+                    "type": "object",
+                    "properties": {
+                        "sunday": { "$ref": "#/definitions/intervals" },
+                        "monday": { "$ref": "#/definitions/intervals" },
+                        "tuesday": { "$ref": "#/definitions/intervals" },
+                        "wednesday": { "$ref": "#/definitions/intervals" },
+                        "thursday": { "$ref": "#/definitions/intervals" },
+                        "friday": { "$ref": "#/definitions/intervals" },
+                        "saturday": { "$ref": "#/definitions/intervals" }
+                    },
+                    "additionalProperties": false,
+                    "required": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+                }
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id", "id", "name", "timezone", "days"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"],
+    "definitions": {
+        "time": {
+            "type": string,
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "interval": {
+            "type": "object",
+            "properties": {
+                "start": {"$ref": "#/definitions/time"},
+                "end": {"$ref": "#/definitions/time"}
+            },
+            "additionalProperties": false,
+            "required": ["start", "end"]
+        },
+        "intervals": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/interval"}
+        }
+    }
+}
+)";
+
+inline constexpr const char *C_DeleteWorkingHoursSchema = R"({
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_delete_working_hours"]},
+        "event_data": {
+            "type": "object",
+            "properties": {
+                "tenant_id": {"type": "string"},
+                "id": {"type": "string"}
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id", "id"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"]
+})";
 }
 
