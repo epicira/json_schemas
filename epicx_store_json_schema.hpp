@@ -404,7 +404,7 @@ inline constexpr const char* C_AddWorkingHoursSchema = R"(
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_add_working_hours"]},
         "event_data": {
-            "type": "object"
+            "type": "object",
             "properties": {
                 "tenant_id": {"type": "string"},
                 "name": {"type": "string"},
@@ -425,14 +425,14 @@ inline constexpr const char* C_AddWorkingHoursSchema = R"(
                 }
             },
             "additionalProperties": false,
-            "required": ["tenant_id", "name", "timezone", "days"]
+            "required": ["tenant_id", "name", "timezone", "schedule"]
         }
     },
     "additionalProperties": false,
     "required": ["event_name", "event_data"],
     "definitions": {
         "time": {
-            "type": string,
+            "type": "string",
             "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
         },
         "interval": {
@@ -459,7 +459,7 @@ inline constexpr const char* C_UpdateWorkingHoursSchema = R"(
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_update_working_hours"]},
         "event_data": {
-            "type": "object"
+            "type": "object",
             "properties": {
                 "tenant_id": {"type": "string"},
                 "id": {"type": "string"},
@@ -481,14 +481,14 @@ inline constexpr const char* C_UpdateWorkingHoursSchema = R"(
                 }
             },
             "additionalProperties": false,
-            "required": ["tenant_id", "id", "name", "timezone", "days"]
+            "required": ["tenant_id", "id", "name", "timezone", "schedule"]
         }
     },
     "additionalProperties": false,
     "required": ["event_name", "event_data"],
     "definitions": {
         "time": {
-            "type": string,
+            "type": "string",
             "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
         },
         "interval": {
@@ -521,6 +521,24 @@ inline constexpr const char *C_DeleteWorkingHoursSchema = R"({
             },
             "additionalProperties": false,
             "required": ["tenant_id", "id"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"]
+})";
+
+inline constexpr const char* C_GetWorkingHoursSchema = R"({
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_get_working_hours"]},
+        "event_data": {
+            "type": "object",
+            "properties": {
+                "tenant_id": {"type": "string"}
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id"]
         }
     },
     "additionalProperties": false,
