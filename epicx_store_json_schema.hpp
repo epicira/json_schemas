@@ -366,7 +366,7 @@ inline constexpr const char *C_ConfigFileSchema = R"({
     "required": ["pg_conn_str", "request_emit_subject"]
 })";
 
-inline constexpr const char* C_GetAgentAudioMetadataSchema = R"({
+inline constexpr const char* C_GetAudioMetadataSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
@@ -374,11 +374,10 @@ inline constexpr const char* C_GetAgentAudioMetadataSchema = R"({
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
-                "queue_id": {"type": "string"}
+                "tenant_id": {"type": "string"}
             },
             "additionalProperties": false,
-            "required": ["tenant_id", "queue_id"]
+            "required": ["tenant_id"]
         }
     },
     "additionalProperties": false,
