@@ -92,18 +92,12 @@ inline constexpr const char *C_AddQueueSchema = R"({
                 "id": {"type": "string"},
                 "name": {"type": "string"},
                 "priority": {"type": "integer"},
-                "size": {"type": "integer"},
                 "strategy": {"type": "string", "enum": ["most_skilled", "most_idle"]},
                 "active": {"type": "boolean"},
                 "direction": {"type": "string", "enum": ["inbound", "outbound"]},
                 "acw_timeout": {"type": "integer"},
-                "max_calls": {"type": "integer"},
-                "open_time": {"type": "string"},
+                "working_hours": {"type": "string"},
                 "hold_music": {"type": "string"},
-                "hold_messages": {
-                    "type": "array",
-                    "items": {"type": "string"}
-                },
                 "agent_hold_music": {"type": "string"},
                 "open_message": {"type": "string"},
                 "close_message": {"type": "string"},
@@ -111,9 +105,8 @@ inline constexpr const char *C_AddQueueSchema = R"({
             },
             "additionalProperties": false,
             "required": [
-                "tenant_id", "name", "priority", "size", "strategy",
-                "active", "direction", "acw_timeout",
-                "max_calls"
+                "tenant_id", "name", "priority", "strategy",
+                "active", "direction", "acw_timeout"
             ]
         }
     },
@@ -133,18 +126,12 @@ inline constexpr const char *C_UpdateQueueSchema = R"({
                 "id": {"type": "string"},
                 "name": {"type": "string"},
                 "priority": {"type": "integer"},
-                "size": {"type": "integer"},
                 "strategy": {"type": "string", "enum": ["most_skilled", "most_idle"]},
                 "active": {"type": "boolean"},
                 "direction": {"type": "string", "enum": ["inbound", "outbound"]},
                 "acw_timeout": {"type": "integer"},
-                "max_calls": {"type": "integer"},
-                "open_time": {"type": "string"},
+                "working_hours": {"type": "string"},
                 "hold_music": {"type": "string"},
-                "hold_messages": {
-                    "type": "array",
-                    "items": {"type": "string"}
-                },
                 "agent_hold_music": {"type": "string"},
                 "open_message": {"type": "string"},
                 "close_message": {"type": "string"},
@@ -276,38 +263,38 @@ inline constexpr const char* C_GetAgentQueueMapsSchema = R"({
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char *C_AddAgentStateSchema = R"({
+inline constexpr const char *C_AddAgentBreakStateSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "event_name": {"type": "string", "enum": ["acd::request_add_agent_state"]},
+        "event_name": {"type": "string", "enum": ["acd::request_add_agent_break_state"]},
         "event_data": {
             "type": "object",
             "properties": {
                 "tenant_id": {"type": "string"},
-                "name": {"type": "string"},
-                "category": {"type": "string", enum: ["ready", "break", "acw"]}
+                "name": {"type": "string", "minLength": 1},
+                "group": {"type": "string", "minLength": 1, "default": "custom"}
             },
             "additionalProperties": false,
-            "required": ["tenant_id", "name", "category"]
+            "required": ["tenant_id", "name"]
         }
     },
     "additionalProperties": false,
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char *C_UpdateAgentStateSchema = R"({
+inline constexpr const char *C_UpdateAgentBreakStateSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "event_name": {"type": "string", "enum": ["acd::request_update_agent_state"]},
+        "event_name": {"type": "string", "enum": ["acd::request_update_agent_break_state"]},
         "event_data": {
             "type": "object",
             "properties": {
                 "tenant_id": {"type": "string"},
                 "id": {"type": "string"},
-                "name": {"type": "string"},
-                "category": {"type": "integer", enum: ["ready", "break", "acw"]}
+                "name": {"type": "string", "minLength": 1},
+                "group": {"type": "string", "minLength": 1}
             },
             "minProperties": 3,
             "additionalProperties": false,
@@ -318,11 +305,11 @@ inline constexpr const char *C_UpdateAgentStateSchema = R"({
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char *C_DeleteAgentStateSchema = R"({
+inline constexpr const char *C_DeleteAgentBreakStateSchema = R"({
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "event_name": {"type": "string", "enum": ["acd::request_delete_agent_state"]},
+        "event_name": {"type": "string", "enum": ["acd::request_delete_agent_break_state"]},
         "event_data": {
             "type": "object",
             "properties": {
@@ -337,12 +324,12 @@ inline constexpr const char *C_DeleteAgentStateSchema = R"({
     "required": ["event_name", "event_data"]
 })";
 
-inline constexpr const char* C_GetAgentStatesSchema = R"(
+inline constexpr const char* C_GetAgentBreakStatesSchema = R"(
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "event_name": {"type": "string", "enum": ["acd::request_get_agent_states"]},
+        "event_name": {"type": "string", "enum": ["acd::request_get_agent_break_states"]},
         "event_data": {
             "type": "object",
             "properties": {
