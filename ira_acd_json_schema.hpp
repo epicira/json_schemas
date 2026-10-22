@@ -32,8 +32,8 @@ inline constexpr const char *C_AgentEventSchema = R"({
             "properties": {
                 "tenant_id": {"type": "string"},
                 "agent_id": {"type": "string"},
-                "event": {"type": "integer"},
-                "state": {"type": "integer"}
+                "event": {"type": "string", "enum": ["set_ready", "set_break"]},
+                "break_state": {"type": "string", "minLength": 1}
             },
             "additionalProperties": false,
             "required": ["tenant_id", "agent_id", "event"]
