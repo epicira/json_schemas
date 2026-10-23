@@ -2,16 +2,16 @@
 
 namespace EpiCXStore {
 inline constexpr const char *C_AddAgentSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_add_agent"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"},
-                "extension": {"type": "string"}
+                "extension": {"type": "string", "minLength": 1}
             },
             "additionalProperties": false,
             "required": ["tenant_id", "extension"]
@@ -22,16 +22,16 @@ inline constexpr const char *C_AddAgentSchema = R"({
 })";
 
 inline constexpr const char *C_UpdateAgentSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_update_agent"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"},
-                "extension": {"type": "string"}
+                "extension": {"type": "string", "minLength": 1}
             },
             "additionalProperties": false,
             "minProperties": 3,
@@ -43,14 +43,14 @@ inline constexpr const char *C_UpdateAgentSchema = R"({
 })";
 
 inline constexpr const char *C_DeleteAgentSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_delete_agent"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"}
             },
             "additionalProperties": false,
@@ -63,7 +63,7 @@ inline constexpr const char *C_DeleteAgentSchema = R"({
 
 inline constexpr const char* C_GetAgentsSchema = R"(
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_get_agents"]},
@@ -81,23 +81,23 @@ inline constexpr const char* C_GetAgentsSchema = R"(
 })";
 
 inline constexpr const char *C_AddQueueSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_add_queue"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"},
                 "name": {"type": "string"},
-                "priority": {"type": "integer"},
+                "priority": {"type": "integer", "minimum": 1, "maximum": 5},
                 "strategy": {"type": "string", "enum": ["most_skilled", "most_idle"]},
                 "active": {"type": "boolean"},
                 "direction": {"type": "string", "enum": ["inbound", "outbound"]},
-                "acw_timeout": {"type": "integer"},
-                "working_hours": {"type": "string"},
-                "hold_music": {"type": "string"},
+                "acw_timeout": {"type": "integer", "minimum": 0, "description": "ACW timeout in seconds"},
+                "working_hours": {"type": "string", "description": "value must be the ID of the working hours profile"},
+                "hold_music": {"type": "string", "description": "value must be the key of the audio that is uploaded"},
                 "agent_hold_music": {"type": "string"},
                 "open_message": {"type": "string"},
                 "close_message": {"type": "string"},
@@ -115,23 +115,23 @@ inline constexpr const char *C_AddQueueSchema = R"({
 })";
 
 inline constexpr const char *C_UpdateQueueSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_update_queue"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"},
                 "name": {"type": "string"},
-                "priority": {"type": "integer"},
+                "priority": {"type": "integer", "minimum": 1, "maximum": 5},
                 "strategy": {"type": "string", "enum": ["most_skilled", "most_idle"]},
                 "active": {"type": "boolean"},
                 "direction": {"type": "string", "enum": ["inbound", "outbound"]},
-                "acw_timeout": {"type": "integer"},
-                "working_hours": {"type": "string"},
-                "hold_music": {"type": "string"},
+                "acw_timeout": {"type": "integer", "minimum": 0, "description": "ACW timeout in seconds"},
+                "working_hours": {"type": "string", "description": "value must be the ID of the working hours profile"},
+                "hold_music": {"type": "string", "description": "value must be the key of the audio that is uploaded"},
                 "agent_hold_music": {"type": "string"},
                 "open_message": {"type": "string"},
                 "close_message": {"type": "string"},
@@ -147,14 +147,14 @@ inline constexpr const char *C_UpdateQueueSchema = R"({
 })";
 
 inline constexpr const char *C_DeleteQueueSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_delete_queue"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"}
             },
             "additionalProperties": false,
@@ -166,7 +166,7 @@ inline constexpr const char *C_DeleteQueueSchema = R"({
 })";
 
 inline constexpr const char* C_GetQueuesSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_get_queues"]},
@@ -184,17 +184,17 @@ inline constexpr const char* C_GetQueuesSchema = R"({
 })";
 
 inline constexpr const char *C_AddAgentQueueMapSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_add_agent_queue_map"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "agent_id": {"type": "string"},
                 "queue_id": {"type": "string"},
-                "skill_level": {"type": "integer"}
+                "skill_level": {"type": "integer", "minimum": 1, "maximum": 5}
             },
             "additionalProperties": false,
             "required": ["tenant_id", "agent_id", "queue_id", "skill_level"]
@@ -205,17 +205,17 @@ inline constexpr const char *C_AddAgentQueueMapSchema = R"({
 })";
 
 inline constexpr const char *C_UpdateAgentQueueMapSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_update_agent_queue_map"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "agent_id": {"type": "string"},
                 "queue_id": {"type": "string"},
-                "skill_level": {"type": "integer"}
+                "skill_level": {"type": "integer", "minimum": 1, "maximum": 5}
             },
             "additionalProperties": false,
             "required": ["tenant_id", "agent_id", "queue_id", "skill_level"]
@@ -226,14 +226,14 @@ inline constexpr const char *C_UpdateAgentQueueMapSchema = R"({
 })";
 
 inline constexpr const char *C_DeleteAgentQueueMapSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_delete_agent_queue_map"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "agent_id": {"type": "string"},
                 "queue_id": {"type": "string"}
             },
@@ -246,7 +246,7 @@ inline constexpr const char *C_DeleteAgentQueueMapSchema = R"({
 })";
 
 inline constexpr const char* C_GetAgentQueueMapsSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_get_agent_queue_maps"]},
@@ -264,16 +264,16 @@ inline constexpr const char* C_GetAgentQueueMapsSchema = R"({
 })";
 
 inline constexpr const char *C_AddAgentBreakStateSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_add_agent_break_state"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "name": {"type": "string", "minLength": 1},
-                "group": {"type": "string", "minLength": 1, "default": "custom"}
+                "type": {"type": "string", "minLength": 1, "default": "custom"}
             },
             "additionalProperties": false,
             "required": ["tenant_id", "name"]
@@ -284,17 +284,17 @@ inline constexpr const char *C_AddAgentBreakStateSchema = R"({
 })";
 
 inline constexpr const char *C_UpdateAgentBreakStateSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_update_agent_break_state"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"},
                 "name": {"type": "string", "minLength": 1},
-                "group": {"type": "string", "minLength": 1}
+                "type": {"type": "string", "minLength": 1}
             },
             "minProperties": 3,
             "additionalProperties": false,
@@ -306,14 +306,14 @@ inline constexpr const char *C_UpdateAgentBreakStateSchema = R"({
 })";
 
 inline constexpr const char *C_DeleteAgentBreakStateSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_delete_agent_break_state"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"}
             },
             "additionalProperties": false,
@@ -326,7 +326,7 @@ inline constexpr const char *C_DeleteAgentBreakStateSchema = R"({
 
 inline constexpr const char* C_GetAgentBreakStatesSchema = R"(
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_get_agent_break_states"]},
@@ -344,7 +344,7 @@ inline constexpr const char* C_GetAgentBreakStatesSchema = R"(
 })";
 
 inline constexpr const char *C_ConfigFileSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "pg_conn_str": {"type": "string", "description": "PostgreSQL connection string"},
@@ -354,7 +354,7 @@ inline constexpr const char *C_ConfigFileSchema = R"({
 })";
 
 inline constexpr const char* C_GetAudioMetadataSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_get_audio_metadata"]},
@@ -373,7 +373,7 @@ inline constexpr const char* C_GetAudioMetadataSchema = R"({
 
 inline constexpr const char* C_GetExtensionsSchema = R"(
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_get_extensions"]},
@@ -392,7 +392,7 @@ inline constexpr const char* C_AddWorkingHoursSchema = R"(
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "name": {"type": "string"},
                 "timezone": {"type": "string", "description": "IANA timezone identifier"},
                 "schedule": {
@@ -447,7 +447,7 @@ inline constexpr const char* C_UpdateWorkingHoursSchema = R"(
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"},
                 "name": {"type": "string"},
                 "timezone": {"type": "string", "description": "IANA timezone identifier"},
@@ -495,14 +495,14 @@ inline constexpr const char* C_UpdateWorkingHoursSchema = R"(
 )";
 
 inline constexpr const char *C_DeleteWorkingHoursSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_delete_working_hours"]},
         "event_data": {
             "type": "object",
             "properties": {
-                "tenant_id": {"type": "string"},
+                "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "id": {"type": "string"}
             },
             "additionalProperties": false,
@@ -514,7 +514,7 @@ inline constexpr const char *C_DeleteWorkingHoursSchema = R"({
 })";
 
 inline constexpr const char* C_GetWorkingHoursSchema = R"({
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
         "event_name": {"type": "string", "enum": ["acd::request_get_working_hours"]},
