@@ -271,6 +271,7 @@ inline constexpr const char *C_AddAgentBreakStateSchema = R"({
         "event_data": {
             "type": "object",
             "properties": {
+                "id": {"type": "string"},
                 "tenant_id": {"type": "string", "not": {"enum": ["all"]}},
                 "name": {"type": "string", "minLength": 1},
                 "type": {"type": "string", "minLength": 1, "default": "custom"}

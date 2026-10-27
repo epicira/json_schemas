@@ -12,7 +12,7 @@ inline constexpr const char *C_AgentEventSchema = R"({
             "properties": {
                 "tenant_id": {"type": "string"},
                 "agent_id": {"type": "string"},
-                "event": {"type": "string", "enum": ["set_ready", "set_break"]},
+                "event": {"type": "string", "enum": ["set_ready", "set_break", "logged_in", "logged_out"]},
                 "break_state": {"type": "string", "minLength": 1}
             },
             "additionalProperties": false,
