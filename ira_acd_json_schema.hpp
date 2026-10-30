@@ -23,6 +23,28 @@ inline constexpr const char *C_AgentEventSchema = R"({
     "required": ["event_name", "event_data"]
 })";
 
+
+inline constexpr const char *C_AddCallSchema = R"({
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_add_call_to_queue"]},
+        "event_data": {
+            "type": "object",
+            "properties": {
+                "tenant_id": {"type": "string"},
+                "call_uuid": {"type": "string"},
+                "queue_id": {"type": "string"},
+                "agent_channel_vars": {"type": "object"}
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id", "call_uuid", "queue_id"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"]
+})";
+
 inline constexpr const char *C_GetCallsSchema = R"({
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
