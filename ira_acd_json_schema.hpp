@@ -23,6 +23,24 @@ inline constexpr const char *C_AgentEventSchema = R"({
     "required": ["event_name", "event_data"]
 })";
 
+inline constexpr const char *C_GetAgentStateSchema = R"({
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_get_agent_state"]},
+        "event_data": {
+            "type": "object",
+            "properties": {
+                "tenant_id": {"type": "string"},
+                "agent_id": {"type": "string"}
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id", "agent_id"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"]
+})";
 
 inline constexpr const char *C_AddCallSchema = R"({
     "$schema": "http://json-schema.org/draft-04/schema#",
