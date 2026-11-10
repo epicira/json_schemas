@@ -75,4 +75,5 @@ namespace iraerror
     inline constexpr std::pair<int, const char* const> C_UnableToDeleteMaskedNumberReservation = {165, "Unable to delete a masked number reservation"};
     inline constexpr std::pair<int, const char* const> C_NoSuchMaskedNumberSessionAlive = { 166, "No such masked number session is alive" };
     inline constexpr std::pair<int, const char* const> C_ParticipantDoesntExistInSession = {167, "Participant doesn't exist in session"};
+    inline constexpr std::pair<int, const char* const> C_BridgeFromNotAllowed = { 168,"bridge_from is not allowed with request_queue_call" };
 } // namespace iraerror

@@ -39,6 +39,7 @@ inline constexpr const char* C_QueueCallSchema = R"(
 			"dial_timeout": {"type": "integer", "minimum": 5},
 			"channel_vars": {"type": "object"},
 			"call_params": {"type": "object"},
+			"bridge_from": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "description": "To be used only with request_make_call_now"},
 			"conf_uuid": {"type": "string", "pattern": "^CONF-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
 			"add_to_conf": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
 			"join_conf": {"type": "boolean", "enum" : [true,false] }
