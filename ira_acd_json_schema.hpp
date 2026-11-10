@@ -12,11 +12,51 @@ inline constexpr const char *C_AgentEventSchema = R"({
             "properties": {
                 "tenant_id": {"type": "string"},
                 "agent_id": {"type": "string"},
-                "event": {"type": "string", "enum": ["set_ready", "set_break"]},
+                "event": {"type": "string", "enum": ["set_ready", "set_break", "logged_in", "logged_out"]},
                 "break_state": {"type": "string", "minLength": 1}
             },
             "additionalProperties": false,
             "required": ["tenant_id", "agent_id", "event"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"]
+})";
+
+inline constexpr const char *C_GetAgentStateSchema = R"({
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_get_agent_state"]},
+        "event_data": {
+            "type": "object",
+            "properties": {
+                "tenant_id": {"type": "string"},
+                "agent_id": {"type": "string"}
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id", "agent_id"]
+        }
+    },
+    "additionalProperties": false,
+    "required": ["event_name", "event_data"]
+})";
+
+inline constexpr const char *C_AddCallSchema = R"({
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "event_name": {"type": "string", "enum": ["acd::request_add_call_to_queue"]},
+        "event_data": {
+            "type": "object",
+            "properties": {
+                "tenant_id": {"type": "string"},
+                "call_uuid": {"type": "string"},
+                "queue_id": {"type": "string"},
+                "agent_channel_vars": {"type": "object"}
+            },
+            "additionalProperties": false,
+            "required": ["tenant_id", "call_uuid", "queue_id"]
         }
     },
     "additionalProperties": false,
