@@ -56,10 +56,10 @@ inline constexpr const char* C_MakeCallSchema = R"(
 			  "from_number": {"type": "string", "maxLength": 25},
 			  "event_subject": {"type": "string", "minLength": 2, "maxLength": 50},
 			  "cpa_config": {"type": "string", "minLength": 0, "maxLength": 15},
-			  "bridge_from": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
 			  "dial_timeout": {"type": "integer", "minimum": 5},
 			  "channel_vars": {"type": "object"},
-			  "call_params": {"type": "object"}
+			  "call_params": {"type": "object"},
+			  "bridge_from": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"}
 			},
 			"required": [ "call_uuid", "gateway", "to_number", "tenant_id","event_subject","from_number" ]
 		}
