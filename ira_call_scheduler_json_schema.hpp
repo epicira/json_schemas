@@ -199,13 +199,13 @@ inline constexpr const char* C_AddCampaignSchema = R"(
 			"working_hours": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$"},
 			"max_limit": {"type": "integer" }, 
 			"gateways": { "type": "array",
-			"items": [{"type": "object",
+			"items": {"type": "object",
 			"properties": { "name": {"type": "string" },
 							"did_range": { "type": "array", "minItems": 1, "uniqueItems": true,
 									"items": {"type": "string","pattern": "^[0-9]{3,10}-[0-9]{3,10}$"}}
 							},
 							"required": ["name"]}
-							]}
+							}
 		},
 		"required": ["name","tenant_id","campaign_type","max_limit","gateways"]
 		}

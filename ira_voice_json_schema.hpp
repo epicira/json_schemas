@@ -390,8 +390,7 @@ inline constexpr const char* C_SelectSipFieldsSchema = R"(
 		"properties": {
 		"sip_fields": {
 			"type": "array",
-			"items": [
-					{
+			"items": {
 						"type": "object",
 						"properties": {   
 							"sip_event": { "type": "string" },
@@ -400,7 +399,6 @@ inline constexpr const char* C_SelectSipFieldsSchema = R"(
 						},
 						"required": [ "sip_event", "sip_field", "var_name" ]
 					}
-				]
 			},
 			"hop_count": {"type": "integer"}
 		},
@@ -420,8 +418,7 @@ inline constexpr const char* C_DeleteSipFieldsSchema = R"(
 		"properties": {
 		"sip_fields": {
 			"type": "array",
-			"items": [
-					{
+			"items": {
 						"type": "object",
 						"properties": {   
 							"sip_event": { "type": "string" },
@@ -429,7 +426,6 @@ inline constexpr const char* C_DeleteSipFieldsSchema = R"(
 						},
 						"required": [ "sip_event" ]
 					}
-				]
 			},
 			"hop_count": {"type": "integer"}
 		},
