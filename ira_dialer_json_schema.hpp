@@ -238,9 +238,9 @@ inline constexpr const char* C_IraDialerGetValidDtmfSchema = R"(
 				"error_message": {"type": "string"},
 				"tts_voice": {"type": "string"},
 				"tts_engine": {"type": "string"},
-				"event_subject": {"type": "string"}
+				"event_url": {"type": "string"}
 			},
-			"required": [ "call_uuid", "var_name", "audio_type" ]
+			"required": [ "call_uuid", "var_name", "audio_type", "event_url" ]
         }
     },
     "required": ["event_name", "event_data"]
@@ -263,9 +263,9 @@ inline constexpr const char* C_IraDialerGetSimpleDtmfSchema = R"(
 			  "digit_count": {"type": "integer", "minimum":1 },
 			  "timeout": {"type": "integer", "minimum": 5 },
 			  "term_keys": {"type": "string"},
-			  "event_subject": {"type": "string"}
+			  "event_url": {"type": "string"}
 			},
-		  "required": [ "call_uuid","var_name" ]
+		  "required": [ "call_uuid","var_name", "event_url" ]
         }
     },
     "required": ["event_name", "event_data"]
